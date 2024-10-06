@@ -4,11 +4,9 @@ load Globales
 %% Load configuration
 configIEOOS
 titulo="Sistema de observacion oceánica del IEO";
-
-wMap=700;
-hMap=700;
-centerMap=[37, -8];
-zoomMap=5;
+mapTamano=[700,700];
+mapCenter=[37, -8];
+mapZoom=5;
 
 
 %% Inicio
@@ -30,9 +28,9 @@ fprintf(fid,'   <script src=''https://api.mapbox.com/mapbox.js/plugins/leaflet-f
 fprintf(fid,'   <link href=''https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css'' rel=''stylesheet'' /> \n');
 fprintf(fid,'	<style>\n');
 fprintf(fid,'		html, body {height: 100%;margin: 0;}\n');
-fprintf(fid,'		.leaflet-container {width: %dpx; height: %dpx;max-width: 100%;max-height: 100%;}\n',wMap,hMap);
+fprintf(fid,'		.leaflet-container {width: %dpx; height: %dpx;max-width: 100%;max-height: 100%;}\n',mapTamano(1),mapTamano(2));
 fprintf(fid,'	</style>\n');
-fprintf(fid,'	<style>#map { width: %dpx; height: %dpx; }\n',wMap,hMap);
+fprintf(fid,'	<style>#map { width: %dpx; height: %dpx; }\n',mapTamano(1),mapTamano(2));
 fprintf(fid,'        .info { padding: 6px 6px; font: 14px/16px Arial, Helvetica, sans-serif; background: white; background: rgba(255,255,255,0.8); box-shadow: 0 0 15px rgba(0,0,0,0.2); border-radius: 5px; } .info h4 { margin: 0 0 5px; color: #777; }\n');
 fprintf(fid,'        .legend { text-align: left; line-height: 18px; color: #555; } .legend i { width: 18px; height: 18px; float: left; margin-right: 8px; opacity: 0.7; }\n');
 fprintf(fid,'    </style>\n');
@@ -44,7 +42,7 @@ fprintf(fid,'<body> \n');
 fprintf(fid,'    <div align="center">\n');
 fprintf(fid,'        Cobertura del sistema de observacion oceanica del <b>IEO</b> el %s <br/>\n',date);
 fprintf(fid,'        (24) Estaciones hidrograficas. Último dato recibido el  %s <br/>\n',date);
-fprintf(fid,'        <div id="map" style="width: %d px; height: %d px;"></div> \n',wMap,hMap);
+fprintf(fid,'        <div id="map" style="width: %d px; height: %d px;"></div> \n',mapTamano(1),mapTamano(2));
 fprintf(fid,'    </div>\n');
 
 fprintf(fid,'<script type="text/javascript">\n');
@@ -102,7 +100,7 @@ fprintf(fid,'            fillColor:estacion[8],\n');
 fprintf(fid,'            opacity: 1,\n');
 fprintf(fid,'            fillOpacity:.45,\n');
 fprintf(fid,'            title: estacion[4]+estacion[1]+'' ''+estacion[5],\n');
-fprintf(fid,'            }).addTo(capaestaciones).bindPopup(''<center><p>Estación <b><a href="http://www.oceanografia.es/IEOOS/estaciones/''+estacion[4]+''_''+estacion[1]+''.html" target="_blank">''+estacion[1]+''</a></b><br><b>''+estacion[4]+''</b><br><br><b>Last profile&nbsp;</b>''+estacion[5]+''</p></center>'');\n');
+fprintf(fid,'            }).addTo(capaestaciones).bindPopup(''<center><p>Estación <b><a href="%s/estaciones/''+estacion[4]+''_''+estacion[1]+''.html" target="_blank">''+estacion[1]+''</a></b><br><b>''+estacion[4]+''</b><br><br><b>Last profile&nbsp;</b>''+estacion[5]+''</p></center>'');\n',domainName);
 fprintf(fid,'		}\n');
 fprintf(fid,'	}\n');
 
@@ -157,8 +155,8 @@ fprintf(fid,'    };\n');
 fprintf(fid,'// Initialize the map and set up control\n');
 fprintf(fid,'  const map = L.map(''map'',{\n');
 fprintf(fid,'                scrollwheelzoom: false, \n');
-fprintf(fid,'                center: [%d, %d],\n',centerMap(1),centerMap(2));
-fprintf(fid,'                zoom: %d,\n',zoomMap);
+fprintf(fid,'                center: [%d, %d],\n',mapCenter(1),mapCenter(2));
+fprintf(fid,'                zoom: %d,\n',mapZoom);
 fprintf(fid,'                layers: [capademarcaciones],\n');
 fprintf(fid,'              });\n');
 fprintf(fid,'  map.addControl(new L.Control.Fullscreen());\n');

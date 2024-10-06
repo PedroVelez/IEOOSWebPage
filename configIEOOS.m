@@ -1,5 +1,13 @@
 % Here are the variables used by the different programs
 
+%% General settings
+titulo_webpage="Sistema de observación oceánica del IEO";
+domainName='http://www.oceanografia.es/IEOOS';
+
+Verbose=0;
+Visible=0;      %Flag to outpun in the screen the figures
+SubeFTP=1;      %1 to upload from matlab de figures and web page to the ftp.
+
 %% Input Directories and files
 % Directory where the matlab scripts than update the web page are located
 PaginaWebDir=strcat(GlobalSU.AnaPath,'/IEOOSWebpage');
@@ -20,22 +28,15 @@ DirOutGraph=strcat(PaginaWebDir,'/images');
 FileHtmMapaSST = strcat(PaginaWebDir,'/html/','MapaSST.html');
 FileHtmlIEOOSStatus=strcat(PaginaWebDir,'/html/','IEOOSStatusLL.html');
 
-%% General settings
-titulo_webpage="Sistema de observación oceánica del IEO";
 
-Verbose=0;
-Visible=0;      %Flag to outpun in the screen the figures
-SubeFTP=1;      %1 to upload from matlab de figures and web page to the ftp.
-
-%Geographical Regions
-%Area de influencia espanola
+%% Geographical Regions
 lat_minIB= 15.00; lat_maxIB=54;
 lon_minIB=-45;    lon_maxIB=38;
 %Atlantico
 lat_min=-65;    lat_max=65;
 lon_min=-80;    lon_max=40;
 
-%LL map limits
+%Map limits
 GMCentroArgoIb=[39,-16];
 GMZoomArgoIb=4;
 GMTamanoArgoIb=[700,650];
