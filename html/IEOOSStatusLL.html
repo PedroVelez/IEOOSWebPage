@@ -271,7 +271,7 @@ const capaestaciones = L.layerGroup();
 let markers = [];
     for (var i = 0; i < estaciones.length; i++) {
 		  estacion = estaciones[i];
-		  if(estacion[0] == 1){
+		  if(estacion[0] == 0){
 			  markers[i] = L.circleMarker([estacion[2], estacion[3]],
             {radius : 3,
             color  : estacion[8],
@@ -280,7 +280,7 @@ let markers = [];
             fillOpacity:.45,
             title: estacion[4]+estacion[1]+' '+estacion[5],
             }).addTo(capaestaciones).bindPopup('<center><p>Estación <b><a href="http://www.oceanografia.es/IEOOS/estaciones/'+estacion[4]+'_'+estacion[1]+'.html" target="_blank">'+estacion[1]+'</a></b><br><b>'+estacion[4]+'</b><br><br><b>Last profile&nbsp;</b>'+estacion[5]+'</p></center>');
-		  }else if (estacion[0] == 0) {
+		  }else if (estacion[0] == 1) {
 			  markers[i] = L.circleMarker([estacion[2], estacion[3]],
             {radius : 3,
             color  : estacion[8],
@@ -316,16 +316,16 @@ let markers = [];
     var legendEst = L.control({position: 'bottomright'});
     legendEst.onAdd = function (map) {
     function getColor(d) {
-        return d === "Radiales"  ? "#bf3eff" :
-               d === "RadProf"  ? "#d57016" :
-               d === "STOCA" ? "#61a347" :
-               d === "RadMed" ? "#e28b05" :
-               d === "Raprocan" ? "#ff9999" :
+        return d === "Campaña - Radiales" ? "#bf3eff" :
+               d === "Campaña - RadProf"  ? "#d57016" :
+               d === "Campaña - STOCA"    ? "#61a347" :
+               d === "Campaña - RadMed"   ? "#e28b05" :
+               d === "Campaña - Raprocan" ? "#ff9999" :
                "#ff7f00";
     }
     var div = L.DomUtil.create('div', 'info legend');
-    labels = ['<strong>Campañas</strong>'],
-    categories = ['Radiales','RadProf', 'STOCA','RadMed','Raprocan','Mareografos'];
+    labels = ['<strong>Observaciones</strong>'],
+    categories = ['Campaña - Radiales','Campaña - RadProf', 'Campaña - STOCA','Campaña - RadMed','Campaña - Raprocan'];
     for (var i = 0; i < categories.length; i++) {
             div.innerHTML += 
             labels.push(

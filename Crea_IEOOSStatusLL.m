@@ -49,7 +49,7 @@ fprintf(fid,'    </div>\n');
 
 fprintf(fid,'<script type="text/javascript">\n');
 
-%Poligono con demarcaciones
+%% Poligono con demarcaciones
 fprintf(fid,'// Define el poligono de cada demarcacion\n');
 fprintf(fid,'const capademarcaciones = L.layerGroup();\n');
 
@@ -85,7 +85,7 @@ fprintf(fid,'		];\n');
 fprintf(fid,'let markers = [];\n');   
 fprintf(fid,'    for (var i = 0; i < estaciones.length; i++) {\n');
 fprintf(fid,'		  estacion = estaciones[i];\n');
-fprintf(fid,'		  if(estacion[0] == 1){\n');
+fprintf(fid,'		  if(estacion[0] == 0){\n');
 fprintf(fid,'			  markers[i] = L.circleMarker([estacion[2], estacion[3]],\n');
 fprintf(fid,'            {radius : 3,\n');
 fprintf(fid,'            color  : estacion[8],\n');
@@ -94,7 +94,7 @@ fprintf(fid,'            opacity: 1,\n');
 fprintf(fid,'            fillOpacity:.45,\n');
 fprintf(fid,'            title: estacion[4]+estacion[1]+'' ''+estacion[5],\n');
 fprintf(fid,'            }).addTo(capaestaciones).bindPopup(''<center><p>Estación <b><a href="http://www.oceanografia.es/IEOOS/estaciones/''+estacion[4]+''_''+estacion[1]+''.html" target="_blank">''+estacion[1]+''</a></b><br><b>''+estacion[4]+''</b><br><br><b>Last profile&nbsp;</b>''+estacion[5]+''</p></center>'');\n');
-fprintf(fid,'		  }else if (estacion[0] == 0) {\n');
+fprintf(fid,'		  }else if (estacion[0] == 1) {\n');
 fprintf(fid,'			  markers[i] = L.circleMarker([estacion[2], estacion[3]],\n');
 fprintf(fid,'            {radius : 3,\n');
 fprintf(fid,'            color  : estacion[8],\n');
@@ -134,16 +134,16 @@ fprintf(fid,'//Leyenda\n');
 fprintf(fid,'    var legendEst = L.control({position: ''bottomright''});\n'); 
 fprintf(fid,'    legendEst.onAdd = function (map) {\n'); 
 fprintf(fid,'    function getColor(d) {\n'); 
-fprintf(fid,'        return d === "Radiales"  ? "#bf3eff" :\n'); 
-fprintf(fid,'               d === "RadProf"  ? "#d57016" :\n'); 
-fprintf(fid,'               d === "STOCA" ? "#61a347" :\n'); 
-fprintf(fid,'               d === "RadMed" ? "#e28b05" :\n'); 
-fprintf(fid,'               d === "Raprocan" ? "#ff9999" :\n');                
+fprintf(fid,'        return d === "Campaña - Radiales" ? "#bf3eff" :\n'); 
+fprintf(fid,'               d === "Campaña - RadProf"  ? "#d57016" :\n'); 
+fprintf(fid,'               d === "Campaña - STOCA"    ? "#61a347" :\n'); 
+fprintf(fid,'               d === "Campaña - RadMed"   ? "#e28b05" :\n'); 
+fprintf(fid,'               d === "Campaña - Raprocan" ? "#ff9999" :\n');                
 fprintf(fid,'               "#ff7f00";\n'); 
 fprintf(fid,'    }\n');
 fprintf(fid,'    var div = L.DomUtil.create(''div'', ''info legend'');\n'); 
-fprintf(fid,'    labels = [''<strong>Campañas</strong>''],\n'); 
-fprintf(fid,'    categories = [''Radiales'',''RadProf'', ''STOCA'',''RadMed'',''Raprocan'',''Mareografos''];\n'); 
+fprintf(fid,'    labels = [''<strong>Observaciones</strong>''],\n'); 
+fprintf(fid,'    categories = [''Campaña - Radiales'',''Campaña - RadProf'', ''Campaña - STOCA'',''Campaña - RadMed'',''Campaña - Raprocan''];\n'); 
 fprintf(fid,'    for (var i = 0; i < categories.length; i++) {\n'); 
 fprintf(fid,'            div.innerHTML += \n'); 
 fprintf(fid,'            labels.push(\n'); 
