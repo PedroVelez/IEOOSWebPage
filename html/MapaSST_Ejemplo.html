@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head> 
+    <title>IEO Ocean Observing System</title> 
+    <meta charset="utf-8" /> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin=""/> 
+     <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script>
+     <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js'></script> 
+     <link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css' rel='stylesheet' /> 
+    <style>
+      html, body {height: 100		.leaflet-container {height: 500px;width: 600px;max-width: 100	</style>
+    <style>#map { width: 800px; height: 600px; }
+          .info { padding: 6px 8px; font: 14px/16px Arial, Helvetica, sans-serif; background: white; background: rgba(255,255,255,0.8); box-shadow: 0 0 15px rgba(0,0,0,0.2); border-radius: 5px; } .info h4 { margin: 0 0 5px; color: #777; }
+          .legend { text-align: left; line-height: 18px; color: #555; } .legend i { width: 18px; height: 18px; float: left; margin-right: 8px; opacity: 0.7; }
+      </style>
+  </head> 
+  
+  <body>
+  <h1>Leaflet Map with Polygons and Locations</h1>
+  <div align="center">
+    Temperatura superficial del mar en las demarcaciones Españolas.<br/>
+     Actualizado el 28-Sep-2024 .<br/>
+    <div id="map" style="width: 700px; height: 650px;"></div> 
+  </div>
+
+  <script type="text/javascript">
+
+// Create the map
+var map = L.map('map').setView([51.505, -0.09], 13);
+
+// Add base map layer
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; OpenStreetMap contributors'
+}).addTo(map);
+
+// Layer 1 (for example, a circle marker layer)
+var layer1 = L.layerGroup([
+    L.circle([51.508, -0.11], { color: 'red', radius: 500 })
+]).addTo(map);
+
+// Layer 2 (for example, a rectangle layer)
+var layer2 = L.layerGroup([
+    L.rectangle([[51.49, -0.08], [51.5, -0.06]], { color: 'blue', weight: 1 })
+]).addTo(map);
+
+// Create a legend for Layer 1
+var legend1 = L.control({ position: 'bottomright' });
+legend1.onAdd = function () {
+    var div = L.DomUtil.create('div', 'info legend');
+    div.innerHTML = '<i style="background:red"></i> Circle Layer<br>';
+    return div;
+};
+
+// Create a legend for Layer 2
+var legend2 = L.control({ position: 'bottomright' });
+legend2.onAdd = function () {
+    var div = L.DomUtil.create('div', 'info legend');
+    div.innerHTML = '<i style="background:blue"></i> Rectangle Layer<br>';
+    return div;
+};
+
+// Function to update legends when layers change
+map.on('overlayadd', function (eventLayer) {
+    if (eventLayer.name === 'Circle Layer') {
+        legend1.addTo(map);
+    } else if (eventLayer.name === 'Rectangle Layer') {
+        legend2.addTo(map);
+    }
+});
+
+map.on('overlayremove', function (eventLayer) {
+    if (eventLayer.name === 'Circle Layer') {
+        map.removeControl(legend1);
+    } else if (eventLayer.name === 'Rectangle Layer') {
+        map.removeControl(legend2);
+    }
+});
+
+// Layer control to toggle layers
+var overlayMaps = {
+    "Circle Layer": layer1,
+    "Rectangle Layer": layer2
+};
+
+L.control.layers(null, overlayMaps).addTo(map);
+
+</script>
+</body>
+</html>

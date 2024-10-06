@@ -1,9 +1,13 @@
-%Titulo
-PaginaWebDir='';
-FileHtmMapaSST='MapaSST.html';
+close all; clear all
+load Globales
+
+%% Load configuration
+configIEOOS
+
+titulo="Temperatura superficial del mar en las demarcaciones Españolas.";
+
 
 %% Inicio
-
 fprintf('>>>>> %s\n',mfilename)
 fid = fopen(FileHtmMapaSST,'w');
 fprintf('     > Writting leaflet file \n');
@@ -11,7 +15,7 @@ fprintf('     > Writting leaflet file \n');
 fprintf(fid,'<!DOCTYPE html>\n');
 fprintf(fid,'<html> \n');
 fprintf(fid,'<head> \n');
-fprintf(fid,'	<title>IEO Ocean Observing System</title> \n');
+fprintf(fid,'	<title>%s</title> \n',titulo_webpage);
 fprintf(fid,'	<meta charset="utf-8" /> \n');
 fprintf(fid,'	<meta name="viewport" content="width=device-width, initial-scale=1.0"> \n');
 
@@ -31,8 +35,10 @@ fprintf(fid,'    </style>\n');
 fprintf(fid,'</head> \n');
 
 fprintf(fid,'<body> \n');
+
+% Titulo
 fprintf(fid,'    <div align="center">\n');
-fprintf(fid,'        Temperatura superficial del mar en las demarcaciones Españolas.<br/>\n');
+fprintf(fid,'        %s<br/>\n',titulo);
 fprintf(fid,'         Actualizado el %s .<br/>\n',date);
 fprintf(fid,'        <div id="map" style="width: 700px; height: 700px;"></div> \n');
 fprintf(fid,'    </div>\n');
@@ -42,12 +48,10 @@ fprintf(fid,'<script type="text/javascript">\n');
 %Poligono con demarcaciones
 fprintf(fid,'// Define el poligono de cada demarcacion\n');
 fprintf(fid,'const capademarcaciones = L.layerGroup();\n');
-Demarcaciones={'CAN',       'NOR',         'SUD',         'ESA',               'LEB';...
-               'Canaria',   'Noratlántica','Sudatlántica','Estrecho y Alborán','Levantino-Balear'; ...
-                '#bf3eff',  '#d57016',     '#61a347',     '#e28b05',           '#ff9999'};
+
 for iD=1:5
     codeDemarcacion=Demarcaciones{1,iD};
-    d=load(strcat('./LimiteDemarcaciones/Demarcacion',Demarcaciones{1,iD},'.txt'));
+    d=load(strcat(dirDemarcaciones,'/Demarcacion',Demarcaciones{1,iD},'.txt'));
     fprintf(fid,'    var polygon%3s = L.polygon([\n    ',Demarcaciones{1,iD});
     for i1=1:length(d)
         fprintf(fid,'[%4.2f,%5.2f],',d(i1,2),d(i1,1));
@@ -78,7 +82,6 @@ fprintf(fid,'let markers = [];\n');
     
 fprintf(fid,'    for (var i = 0; i < estaciones.length; i++) {\n');
 fprintf(fid,'		  estacion = estaciones[i];\n');
-      
 fprintf(fid,'		  if(estacion[0] == 1){\n');
 fprintf(fid,'			  markers[i] = L.circleMarker([estacion[2], estacion[3]],\n');
 fprintf(fid,'            {radius : 3,\n');
@@ -148,8 +151,6 @@ fprintf(fid,'        div.innerHTML = labels.join(''<br>'');\n');
 fprintf(fid,'    return div;\n');
 fprintf(fid,'    };\n');
 fprintf(fid,'    legend.addTo(map);\n');
-    
-
 
 fprintf(fid,'</script> \n');
 fprintf(fid,'</body>\n');
@@ -158,12 +159,11 @@ fprintf(fid,'</html>\n');
 %% Ftp the file
 fprintf('     > Uploading  %s \n',FileHtmMapaSST);
 ftpobj=FtpOceanografia;
-cd(ftpobj,'/html/IEOOS/SST');
+cd(ftpobj,ftp_dir_SST);
 mput(ftpobj,FileHtmMapaSST);
 
 %% Writting Informe
 %save(FileNameInforme,'Informe','platformes','juldsIB','platdatacentr')
 %fprintf('     > %s \n',Informe)
-
 
 fprintf('%s <<<<<\n',mfilename)
