@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html> 
+<head> 
+	<title>IEO Ocean Observing System</title> 
+	<meta charset="utf-8" /> 
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin=""/> 
+   <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script>
+   <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js'></script> 
+   <link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css' rel='stylesheet' /> 
+	<style>
+		html, body {height: 100		.leaflet-container {height: 500px;width: 600px;max-width: 100	</style>
+	<style>#map { width: 800px; height: 600px; }
+        .info { padding: 6px 8px; font: 14px/16px Arial, Helvetica, sans-serif; background: white; background: rgba(255,255,255,0.8); box-shadow: 0 0 15px rgba(0,0,0,0.2); border-radius: 5px; } .info h4 { margin: 0 0 5px; color: #777; }
+        .legend { text-align: left; line-height: 18px; color: #555; } .legend i { width: 18px; height: 18px; float: left; margin-right: 8px; opacity: 0.7; }
+    </style>
+</head> 
+<body> 
+    <div align="center">
+        Cobertura del sistema de observacion oceanica del <b>IEO</b> el 27-May-2022 <br/>
+        (24) Estaciones hidrograficas. Último dato recibido el 21-Apr-2022 06:03:30 <br/>
+        <div id="map" style="width: 700px; height: 650px;"></div> 
+    </div>
+<script type="text/javascript">
+// Initialize the map and set up control
+   const map = L.map('map',{scrollwheelzoom: false}).setView([38.00, -8.00],  5);
+   map.addControl(new L.Control.Fullscreen());
+//Tiles
+    const tiles = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+       attribution: 'Tiles &copy ESRI'}).addTo(map);
+//Defino iconos
+   var stationIcon = L.Icon.extend({
+       options: {
+           iconSize:     [10, 10],
+           iconAnchor:   [ 5,  5],
+           popupAnchor:  [-3, -76]
+       }
+   });
+   var marcador0 = new stationIcon({iconUrl: 'http://www.oceanografia.es/argo/imagenes/icons8-select-10.png'}),
+       marcador1 = new stationIcon({iconUrl: 'http://www.oceanografia.es/argo/imagenes/icons8-select-10.png'});
+//AnAde demarcaciones
+var latlngs = [[24, -18],[24, -10],[28, -18]];
+    var polygon = L.polygon(latlngs, {color: 'red'});
+    polygon.addTo(map);
+    //var wmsLayer = L.tileLayer.wms('http://ows.mundialis.de/services/service?', {
+    //layers: 'SRTM30-Colored-Hillshade'}).addTo(map);
+    var wmsLayer = L.tileLayer.wms('https://www.juntadeandalucia.es/medioambiente/mapwms/REDIAM_demarcaciones_LPMM?', {
+    layers:'demarcacionesLPMM1',
+    transparent: true,
+    format: 'image/png'}).addTo(map);
+ //Datos de las ultimas ocupaciones de las estaciones
+   var estaciones = [
+           [1,'001',42.22,-8.79,'Radiales','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'002',42.21,-8.85,'Radiales','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'003',42.14,-8.96,'Radiales','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'004',42.13,-9.12,'Radiales','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'005',43.36,-8.37,'Radiales','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'006',43.39,-8.38,'Radiales','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'007',43.39,-8.40,'Radiales','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'008',43.41,-8.42,'Radiales','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'009',43.42,-8.44,'Radiales','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'010',43.60,-6.13,'Radiales','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'011',43.70,-6.15,'Radiales','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'012',43.77,-6.17,'Radiales','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'013',43.58,-5.61,'Radiales','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'014',43.67,-5.58,'Radiales','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'015',43.78,-5.55,'Radiales','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'016',43.50,-3.78,'Radiales','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'017',43.57,-3.78,'Radiales','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'018',43.71,-3.78,'Radiales','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'019',43.80,-3.78,'Radiales','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'001',43.00,-9.34,'RadProf','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'002',43.00,-9.40,'RadProf','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'003',43.00,-9.46,'RadProf','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'004',43.00,-9.52,'RadProf','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'005',43.00,-9.58,'RadProf','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'006',43.00,-9.65,'RadProf','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'007',43.00,-9.72,'RadProf','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'008',43.00,-9.87,'RadProf','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'009',43.00,-10.02,'RadProf','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'010',43.00,-10.13,'RadProf','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'011',43.00,-10.33,'RadProf','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'012',43.00,-10.67,'RadProf','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'013',43.00,-11.00,'RadProf','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'014',43.00,-11.33,'RadProf','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'015',43.00,-11.67,'RadProf','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'016',43.00,-12.00,'RadProf','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'017',43.00,-12.33,'RadProf','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'018',43.00,-12.67,'RadProf','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'019',43.00,-13.12,'RadProf','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'020',43.00,-13.58,'RadProf','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'021',43.00,-14.03,'RadProf','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'022',43.00,-14.49,'RadProf','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'023',43.00,-14.95,'RadProf','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'024',43.00,-15.40,'RadProf','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'001',36.71,-6.54,'STOCA','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'002',36.67,-6.61,'STOCA','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'003',36.62,-6.69,'STOCA','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'004',36.58,-6.78,'STOCA','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'005',36.54,-6.83,'STOCA','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'006',36.48,-6.93,'STOCA','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'007',36.41,-6.30,'STOCA','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'008',36.35,-6.39,'STOCA','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'009',36.28,-6.50,'STOCA','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'010',36.24,-6.57,'STOCA','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'011',36.20,-6.62,'STOCA','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'012',36.15,-6.71,'STOCA','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'013',36.15,-6.03,'STOCA','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'014',36.07,-6.09,'STOCA','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'015',36.00,-6.15,'STOCA','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'016',35.92,-6.21,'STOCA','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'001',39.50,2.40,'RadMed','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'002',39.45,2.32,'RadMed','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'003',39.41,2.23,'RadMed','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'004',39.37,2.15,'RadMed','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'005',39.32,2.07,'RadMed','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'006',39.28,1.98,'RadMed','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'007',39.23,1.89,'RadMed','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'008',39.19,1.81,'RadMed','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'009',39.14,1.72,'RadMed','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'010',39.09,1.63,'RadMed','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'011',38.87,1.17,'RadMed','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'012',38.87,1.07,'RadMed','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'013',38.87,0.98,'RadMed','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'014',38.87,0.87,'RadMed','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'015',38.87,0.76,'RadMed','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'016',38.87,0.66,'RadMed','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'017',38.87,0.56,'RadMed','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'018',38.87,0.45,'RadMed','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'019',38.87,0.34,'RadMed','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'020',38.87,0.24,'RadMed','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'021',38.87,0.15,'RadMed','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'022',38.95,0.27,'RadMed','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'023',39.02,0.40,'RadMed','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'024',39.10,0.53,'RadMed','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'025',39.18,0.65,'RadMed','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'026',39.13,0.81,'RadMed','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'027',39.09,0.96,'RadMed','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'028',39.04,1.11,'RadMed','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'029',39.01,1.20,'RadMed','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'030',39.14,1.55,'RadMed','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'031',39.25,1.61,'RadMed','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'032',39.36,1.67,'RadMed','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'033',39.48,1.73,'RadMed','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'034',39.49,1.90,'RadMed','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'035',39.50,2.06,'RadMed','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'036',39.51,2.22,'RadMed','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'037',39.52,2.33,'RadMed','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'038',39.24,0.46,'RadMed','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'039',39.30,0.26,'RadMed','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'040',39.36,0.06,'RadMed','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'041',39.43,-0.14,'RadMed','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'042',39.43,-0.14,'RadMed','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'043',39.43,0.22,'RadMed','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'044',39.44,0.44,'RadMed','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'045',39.44,0.65,'RadMed','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'046',39.06,0.46,'RadMed','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'047',39.00,3.17,'RadMed','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'048',39.87,4.36,'RadMed','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'049',39.95,4.42,'RadMed','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'050',40.06,4.50,'RadMed','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'051',40.17,4.58,'RadMed','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'052',40.17,4.62,'RadMed','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'053',39.48,2.43,'RadMed','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'054',39.41,2.43,'RadMed','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'055',39.34,2.43,'RadMed','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'056',41.32,2.21,'RadMed','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'057',41.25,2.30,'RadMed','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'058',41.17,2.41,'RadMed','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'059',41.08,2.52,'RadMed','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'060',41.00,2.63,'RadMed','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'061',40.76,2.95,'RadMed','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'062',40.40,3.76,'RadMed','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'063',40.50,0.87,'RadMed','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'064',40.48,1.06,'RadMed','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'065',40.46,1.26,'RadMed','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'066',40.43,1.43,'RadMed','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'067',40.44,1.72,'RadMed','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'068',37.53,-0.76,'RadMed','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'069',37.50,-0.76,'RadMed','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'070',37.46,-0.76,'RadMed','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'071',37.37,-0.76,'RadMed','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'072',37.21,-0.76,'RadMed','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'073',36.70,-2.17,'RadMed','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'074',36.68,-2.17,'RadMed','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'075',36.62,-2.17,'RadMed','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'076',36.50,-2.17,'RadMed','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'077',36.42,-2.17,'RadMed','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'078',36.68,-3.47,'RadMed','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'079',36.66,-3.47,'RadMed','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'080',36.62,-3.47,'RadMed','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'081',36.58,-3.47,'RadMed','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'082',36.53,-3.47,'RadMed','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'083',36.74,-4.07,'RadMed','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'084',36.69,-4.06,'RadMed','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'085',36.64,-4.07,'RadMed','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'086',36.57,-4.07,'RadMed','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'087',36.70,-4.41,'RadMed','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'088',36.64,-4.35,'RadMed','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'089',36.59,-4.31,'RadMed','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'090',36.54,-4.26,'RadMed','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'091',36.49,-4.22,'RadMed','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'092',36.47,-4.74,'RadMed','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'093',36.42,-4.74,'RadMed','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'094',36.35,-4.74,'RadMed','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'095',36.25,-4.74,'RadMed','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'096',36.13,-3.32,'RadMed','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'097',36.07,-3.25,'RadMed','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'098',36.00,-3.18,'RadMed','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'099',35.90,-3.11,'RadMed','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'100',35.80,-3.02,'RadMed','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'101',35.75,-2.97,'RadMed','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'611',25.50,-16.91,'Raprocan','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'610',25.43,-16.82,'Raprocan','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'609',25.39,-16.76,'Raprocan','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'608',25.33,-16.68,'Raprocan','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'607',25.27,-16.59,'Raprocan','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'606',25.22,-16.52,'Raprocan','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'605',25.16,-16.45,'Raprocan','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'604',25.11,-16.38,'Raprocan','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'603',25.04,-16.27,'Raprocan','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'602',24.95,-16.15,'Raprocan','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'601',24.86,-16.03,'Raprocan','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'910',30.24,-12.13,'Raprocan','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'909',30.08,-11.85,'Raprocan','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'908',29.92,-11.61,'Raprocan','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'907',29.77,-11.37,'Raprocan','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'906',29.65,-11.16,'Raprocan','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'905',29.55,-10.96,'Raprocan','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'904',29.49,-10.85,'Raprocan','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'903',29.44,-10.77,'Raprocan','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'902',29.40,-10.69,'Raprocan','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'901',29.34,-10.58,'Raprocan','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'314',27.70,-15.57,'Raprocan','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'313',27.66,-15.51,'Raprocan','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'312',27.58,-15.41,'Raprocan','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'311',27.48,-15.29,'Raprocan','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'310',27.36,-15.13,'Raprocan','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'309',27.23,-14.97,'Raprocan','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'308',27.11,-14.81,'Raprocan','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'307',26.94,-14.60,'Raprocan','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'306',26.86,-14.50,'Raprocan','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'305',26.78,-14.40,'Raprocan','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'304',26.72,-14.32,'Raprocan','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'303',26.67,-14.26,'Raprocan','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'302',26.63,-14.21,'Raprocan','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'301',26.59,-14.16,'Raprocan','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'1',28.52,-12.47,'Raprocan','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'2',28.54,-12.55,'Raprocan','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'3',28.57,-12.64,'Raprocan','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'4',28.59,-12.74,'Raprocan','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'5',28.63,-12.88,'Raprocan','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'6',28.66,-13.01,'Raprocan','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'7',28.71,-13.21,'Raprocan','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'8',28.74,-13.36,'Raprocan','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'9',28.77,-13.47,'Raprocan','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'10',28.80,-13.71,'Raprocan','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'11',28.88,-14.10,'Raprocan','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'12',28.94,-14.38,'Raprocan','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'13',29.02,-14.73,'Raprocan','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'14',29.10,-15.11,'Raprocan','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'15',29.17,-15.50,'Raprocan','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'16',29.17,-15.83,'Raprocan','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'17',29.17,-16.20,'Raprocan','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'18',29.17,-16.57,'Raprocan','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'19',29.17,-16.91,'Raprocan','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'20',29.17,-17.29,'Raprocan','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'21',29.17,-17.65,'Raprocan','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'22',29.17,-18.00,'Raprocan','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'23',29.17,-18.24,'Raprocan','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+           [1,'24',29.17,-18.50,'Raprocan','14-Jan-2020 00:10:40','SurfaceValue','BottonValue','#bf3eff'], 
+		];
+for (var i = 0; i < estaciones.length; i++) {
+		var estacion = estaciones[i];
+		if(estacion[0] == 1){
+			L.circleMarker([estacion[2], estacion[3]],
+            {radius : 3,
+            color  : estacion[8],
+            title: estacion[4]+estacion[1]+' '+estacion[5],
+            opacity: 1,
+            fillOpacity:.45,
+            fillColor:estacion[8]}).addTo(map).bindPopup('<center><p>Station <b><a href="http://www.oceanografia.es/IEOOS/estaciones/'+estacion[4]+'_'+estacion[1]+'.html" target="_blank">'+estacion[1]+'</a></b><br><b>'+estacion[4]+'</b><br><br><b>Last profile&nbsp;</b>'+estacion[5]+'</p></center>');
+		}else if (estacion[0] == 0) {
+			L.marker([estacion[2], estacion[3]],{
+			icon: marcador0,
+			title: estacion[4]+estacion[1]+' '+estacion[5],
+			}).addTo(map).bindPopup('<center><p>Station <b><a href="http://www.oceanografia.es/IEOOS/estaciones/'+estacion[1]+'.html" target="_blank">'+estacion[1]+'</a></b><br><b>'+estacion[4]+'</b><br><br><b>Last profile&nbsp;</b>'+estacion[5]+'</p></center>');
+		}
+	}
+//Leyenda
+    var legend = L.control({position: 'bottomright'});
+    legend.onAdd = function (map) {
+    function getColor(d) {
+        return d === "Radiales"  ? "#bf3eff" :
+               d === "RadProf"  ? "#d57016" :
+               d === "STOCA" ? "#61a347" :
+               d === "RadMed" ? "#e28b05" :
+               d === "Raprocan" ? "#ff9999" :
+               "#ff7f00";
+    }
+    var div = L.DomUtil.create('div', 'info legend');
+    labels = ['<strong>Campañas</strong>'],
+    categories = ['Radiales','RadProf', 'STOCA','RadMed','Raprocan','Mareografos'];
+    for (var i = 0; i < categories.length; i++) {
+            div.innerHTML += 
+            labels.push(
+               '<i class="circle" style="background:' + getColor(categories[i]) + '"></i>' +
+            (categories[i] ? categories[i] : '+'));}
+        div.innerHTML = labels.join('<br>');
+    return div;
+    };
+    legend.addTo(map);
+</script> 
+</body>
+</html>
+</html>

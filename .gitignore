@@ -1,0 +1,15 @@
+.DS_Store
+.AppleDouble
+*.*~
+*._*
+*.swp
+*.log
+*.nc
+*.png
+prueba*
+Prueba*
+**/Info/*
+Info/*
+data/*
+images/*
+.ipynb_checkpoints/*
