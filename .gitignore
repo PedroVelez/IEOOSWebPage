@@ -5,11 +5,8 @@
 *.swp
 *.log
 *.nc
-*.png
 prueba*
 Prueba*
-**/Info/*
 Info/*
-data/*
-images/*
+Data/*
 .ipynb_checkpoints/*
