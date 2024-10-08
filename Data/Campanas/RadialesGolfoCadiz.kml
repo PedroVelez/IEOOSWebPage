@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="utf-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2">
+   <Document>
+      <name>RadialesGolfoCadiz_IEO</name>
+      <Folder>
+         <Placemark id="STOCA_85_1">
+            <name/>
+            <visibility>1</visibility>
+            <description>&lt;h3&gt;STOCA&lt;/h3&gt;&lt;br&gt;&lt;/br&gt;&lt;table border="1" padding="2"&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Longitud&lt;/td&gt;&lt;td&gt;-6.5399°&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Latitud&lt;/td&gt;&lt;td&gt;36.7111°&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</description>
+            <Style>
+               <IconStyle>
+                  <color>FFFFFFFF</color>
+                  <scale>0.5</scale>
+                  <Icon>
+                     <href>http://gmaps-samples.googlecode.com/svn/trunk/markers/orange/blank.png</href>
+                  </Icon>
+               </IconStyle>
+            </Style>
+            <Point id="Point_STOCA_85">
+               <altitudeMode>clampToGround</altitudeMode>
+               <coordinates>-6.5399,36.7111,1</coordinates>
+            </Point>
+         </Placemark>
+         <name>STOCA_85</name>
+         <id>STOCA_85</id>
+      </Folder>
+      <Folder>
+         <Placemark id="STOCA_86_1">
+            <name/>
+            <visibility>1</visibility>
+            <description>&lt;h3&gt;STOCA&lt;/h3&gt;&lt;br&gt;&lt;/br&gt;&lt;table border="1" padding="2"&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Longitud&lt;/td&gt;&lt;td&gt;-6.6077°&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Latitud&lt;/td&gt;&lt;td&gt;36.6734°&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</description>
+            <Style>
+               <IconStyle>
+                  <color>FFFFFFFF</color>
+                  <scale>0.5</scale>
+                  <Icon>
+                     <href>http://gmaps-samples.googlecode.com/svn/trunk/markers/orange/blank.png</href>
+                  </Icon>
+               </IconStyle>
+            </Style>
+            <Point id="Point_STOCA_86">
+               <altitudeMode>clampToGround</altitudeMode>
+               <coordinates>-6.6077,36.6734,1</coordinates>
+            </Point>
+         </Placemark>
+         <name>STOCA_86</name>
+         <id>STOCA_86</id>
+      </Folder>
+      <Folder>
+         <Placemark id="STOCA_87_1">
+            <name/>
+            <visibility>1</visibility>
+            <description>&lt;h3&gt;STOCA&lt;/h3&gt;&lt;br&gt;&lt;/br&gt;&lt;table border="1" padding="2"&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Longitud&lt;/td&gt;&lt;td&gt;-6.6945°&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Latitud&lt;/td&gt;&lt;td&gt;36.6189°&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</description>
+            <Style>
+               <IconStyle>
+                  <color>FFFFFFFF</color>
+                  <scale>0.5</scale>
+                  <Icon>
+                     <href>http://gmaps-samples.googlecode.com/svn/trunk/markers/orange/blank.png</href>
+                  </Icon>
+               </IconStyle>
+            </Style>
+            <Point id="Point_STOCA_87">
+               <altitudeMode>clampToGround</altitudeMode>
+               <coordinates>-6.6945,36.6189,1</coordinates>
+            </Point>
+         </Placemark>
+         <name>STOCA_87</name>
+         <id>STOCA_87</id>
+      </Folder>
+      <Folder>
+         <Placemark id="STOCA_88_1">
+            <name/>
+            <visibility>1</visibility>
+            <description>&lt;h3&gt;STOCA&lt;/h3&gt;&lt;br&gt;&lt;/br&gt;&lt;table border="1" padding="2"&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Longitud&lt;/td&gt;&lt;td&gt;-6.7759°&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Latitud&lt;/td&gt;&lt;td&gt;36.575°&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</description>
+            <Style>
+               <IconStyle>
+                  <color>FFFFFFFF</color>
+                  <scale>0.5</scale>
+                  <Icon>
+                     <href>http://gmaps-samples.googlecode.com/svn/trunk/markers/orange/blank.png</href>
+                  </Icon>
+               </IconStyle>
+            </Style>
+            <Point id="Point_STOCA_88">
+               <altitudeMode>clampToGround</altitudeMode>
+               <coordinates>-6.7759,36.575,1</coordinates>
+            </Point>
+         </Placemark>
+         <name>STOCA_88</name>
+         <id>STOCA_88</id>
+      </Folder>
+      <Folder>
+         <Placemark id="STOCA_89_1">
+            <name/>
+            <visibility>1</visibility>
+            <description>&lt;h3&gt;STOCA&lt;/h3&gt;&lt;br&gt;&lt;/br&gt;&lt;table border="1" padding="2"&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Longitud&lt;/td&gt;&lt;td&gt;-6.8328°&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Latitud&lt;/td&gt;&lt;td&gt;36.5394°&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</description>
+            <Style>
+               <IconStyle>
+                  <color>FFFFFFFF</color>
+                  <scale>0.5</scale>
+                  <Icon>
+                     <href>http://gmaps-samples.googlecode.com/svn/trunk/markers/orange/blank.png</href>
+                  </Icon>
+               </IconStyle>
+            </Style>
+            <Point id="Point_STOCA_89">
+               <altitudeMode>clampToGround</altitudeMode>
+               <coordinates>-6.8328,36.5394,1</coordinates>
+            </Point>
+         </Placemark>
+         <name>STOCA_89</name>
+         <id>STOCA_89</id>
+      </Folder>
+      <Folder>
+         <Placemark id="STOCA_90_1">
+            <name/>
+            <visibility>1</visibility>
+            <description>&lt;h3&gt;STOCA&lt;/h3&gt;&lt;br&gt;&lt;/br&gt;&lt;table border="1" padding="2"&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Longitud&lt;/td&gt;&lt;td&gt;-6.9278°&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Latitud&lt;/td&gt;&lt;td&gt;36.4849°&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</description>
+            <Style>
+               <IconStyle>
+                  <color>FFFFFFFF</color>
+                  <scale>0.5</scale>
+                  <Icon>
+                     <href>http://gmaps-samples.googlecode.com/svn/trunk/markers/orange/blank.png</href>
+                  </Icon>
+               </IconStyle>
+            </Style>
+            <Point id="Point_STOCA_90">
+               <altitudeMode>clampToGround</altitudeMode>
+               <coordinates>-6.9278,36.4849,1</coordinates>
+            </Point>
+         </Placemark>
+         <name>STOCA_90</name>
+         <id>STOCA_90</id>
+      </Folder>
+      <Folder>
+         <Placemark id="STOCA_91_1">
+            <name/>
+            <visibility>1</visibility>
+            <description>&lt;h3&gt;STOCA&lt;/h3&gt;&lt;br&gt;&lt;/br&gt;&lt;table border="1" padding="2"&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Longitud&lt;/td&gt;&lt;td&gt;-6.2951°&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Latitud&lt;/td&gt;&lt;td&gt;36.4095°&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</description>
+            <Style>
+               <IconStyle>
+                  <color>FFFFFFFF</color>
+                  <scale>0.5</scale>
+                  <Icon>
+                     <href>http://gmaps-samples.googlecode.com/svn/trunk/markers/orange/blank.png</href>
+                  </Icon>
+               </IconStyle>
+            </Style>
+            <Point id="Point_STOCA_91">
+               <altitudeMode>clampToGround</altitudeMode>
+               <coordinates>-6.2951,36.4095,1</coordinates>
+            </Point>
+         </Placemark>
+         <name>STOCA_91</name>
+         <id>STOCA_91</id>
+      </Folder>
+      <Folder>
+         <Placemark id="STOCA_92_1">
+            <name/>
+            <visibility>1</visibility>
+            <description>&lt;h3&gt;STOCA&lt;/h3&gt;&lt;br&gt;&lt;/br&gt;&lt;table border="1" padding="2"&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Longitud&lt;/td&gt;&lt;td&gt;-6.3927°&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Latitud&lt;/td&gt;&lt;td&gt;36.3488°&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</description>
+            <Style>
+               <IconStyle>
+                  <color>FFFFFFFF</color>
+                  <scale>0.5</scale>
+                  <Icon>
+                     <href>http://gmaps-samples.googlecode.com/svn/trunk/markers/orange/blank.png</href>
+                  </Icon>
+               </IconStyle>
+            </Style>
+            <Point id="Point_STOCA_92">
+               <altitudeMode>clampToGround</altitudeMode>
+               <coordinates>-6.3927,36.3488,1</coordinates>
+            </Point>
+         </Placemark>
+         <name>STOCA_92</name>
+         <id>STOCA_92</id>
+      </Folder>
+      <Folder>
+         <Placemark id="STOCA_93_1">
+            <name/>
+            <visibility>1</visibility>
+            <description>&lt;h3&gt;STOCA&lt;/h3&gt;&lt;br&gt;&lt;/br&gt;&lt;table border="1" padding="2"&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Longitud&lt;/td&gt;&lt;td&gt;-6.4958°&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Latitud&lt;/td&gt;&lt;td&gt;36.2839°&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</description>
+            <Style>
+               <IconStyle>
+                  <color>FFFFFFFF</color>
+                  <scale>0.5</scale>
+                  <Icon>
+                     <href>http://gmaps-samples.googlecode.com/svn/trunk/markers/orange/blank.png</href>
+                  </Icon>
+               </IconStyle>
+            </Style>
+            <Point id="Point_STOCA_93">
+               <altitudeMode>clampToGround</altitudeMode>
+               <coordinates>-6.4958,36.2839,1</coordinates>
+            </Point>
+         </Placemark>
+         <name>STOCA_93</name>
+         <id>STOCA_93</id>
+      </Folder>
+      <Folder>
+         <Placemark id="STOCA_94_1">
+            <name/>
+            <visibility>1</visibility>
+            <description>&lt;h3&gt;STOCA&lt;/h3&gt;&lt;br&gt;&lt;/br&gt;&lt;table border="1" padding="2"&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Longitud&lt;/td&gt;&lt;td&gt;-6.5663°&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Latitud&lt;/td&gt;&lt;td&gt;36.2379°&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</description>
+            <Style>
+               <IconStyle>
+                  <color>FFFFFFFF</color>
+                  <scale>0.5</scale>
+                  <Icon>
+                     <href>http://gmaps-samples.googlecode.com/svn/trunk/markers/orange/blank.png</href>
+                  </Icon>
+               </IconStyle>
+            </Style>
+            <Point id="Point_STOCA_94">
+               <altitudeMode>clampToGround</altitudeMode>
+               <coordinates>-6.5663,36.2379,1</coordinates>
+            </Point>
+         </Placemark>
+         <name>STOCA_94</name>
+         <id>STOCA_94</id>
+      </Folder>
+      <Folder>
+         <Placemark id="STOCA_95_1">
+            <name/>
+            <visibility>1</visibility>
+            <description>&lt;h3&gt;STOCA&lt;/h3&gt;&lt;br&gt;&lt;/br&gt;&lt;table border="1" padding="2"&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Longitud&lt;/td&gt;&lt;td&gt;-6.6206°&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Latitud&lt;/td&gt;&lt;td&gt;36.2044°&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</description>
+            <Style>
+               <IconStyle>
+                  <color>FFFFFFFF</color>
+                  <scale>0.5</scale>
+                  <Icon>
+                     <href>http://gmaps-samples.googlecode.com/svn/trunk/markers/orange/blank.png</href>
+                  </Icon>
+               </IconStyle>
+            </Style>
+            <Point id="Point_STOCA_95">
+               <altitudeMode>clampToGround</altitudeMode>
+               <coordinates>-6.6206,36.2044,1</coordinates>
+            </Point>
+         </Placemark>
+         <name>STOCA_95</name>
+         <id>STOCA_95</id>
+      </Folder>
+      <Folder>
+         <Placemark id="STOCA_96_1">
+            <name/>
+            <visibility>1</visibility>
+            <description>&lt;h3&gt;STOCA&lt;/h3&gt;&lt;br&gt;&lt;/br&gt;&lt;table border="1" padding="2"&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Longitud&lt;/td&gt;&lt;td&gt;-6.7128°&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Latitud&lt;/td&gt;&lt;td&gt;36.1457°&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</description>
+            <Style>
+               <IconStyle>
+                  <color>FFFFFFFF</color>
+                  <scale>0.5</scale>
+                  <Icon>
+                     <href>http://gmaps-samples.googlecode.com/svn/trunk/markers/orange/blank.png</href>
+                  </Icon>
+               </IconStyle>
+            </Style>
+            <Point id="Point_STOCA_96">
+               <altitudeMode>clampToGround</altitudeMode>
+               <coordinates>-6.7128,36.1457,1</coordinates>
+            </Point>
+         </Placemark>
+         <name>STOCA_96</name>
+         <id>STOCA_96</id>
+      </Folder>
+      <Folder>
+         <Placemark id="STOCA_97_1">
+            <name/>
+            <visibility>1</visibility>
+            <description>&lt;h3&gt;STOCA&lt;/h3&gt;&lt;br&gt;&lt;/br&gt;&lt;table border="1" padding="2"&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Longitud&lt;/td&gt;&lt;td&gt;-6.0341°&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Latitud&lt;/td&gt;&lt;td&gt;36.1499°&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</description>
+            <Style>
+               <IconStyle>
+                  <color>FFFFFFFF</color>
+                  <scale>0.5</scale>
+                  <Icon>
+                     <href>http://gmaps-samples.googlecode.com/svn/trunk/markers/orange/blank.png</href>
+                  </Icon>
+               </IconStyle>
+            </Style>
+            <Point id="Point_STOCA_97">
+               <altitudeMode>clampToGround</altitudeMode>
+               <coordinates>-6.0341,36.1499,1</coordinates>
+            </Point>
+         </Placemark>
+         <name>STOCA_97</name>
+         <id>STOCA_97</id>
+      </Folder>
+      <Folder>
+         <Placemark id="STOCA_98_1">
+            <name/>
+            <visibility>1</visibility>
+            <description>&lt;h3&gt;STOCA&lt;/h3&gt;&lt;br&gt;&lt;/br&gt;&lt;table border="1" padding="2"&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Longitud&lt;/td&gt;&lt;td&gt;-6.095°&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Latitud&lt;/td&gt;&lt;td&gt;36.074°&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</description>
+            <Style>
+               <IconStyle>
+                  <color>FFFFFFFF</color>
+                  <scale>0.5</scale>
+                  <Icon>
+                     <href>http://gmaps-samples.googlecode.com/svn/trunk/markers/orange/blank.png</href>
+                  </Icon>
+               </IconStyle>
+            </Style>
+            <Point id="Point_STOCA_98">
+               <altitudeMode>clampToGround</altitudeMode>
+               <coordinates>-6.095,36.074,1</coordinates>
+            </Point>
+         </Placemark>
+         <name>STOCA_98</name>
+         <id>STOCA_98</id>
+      </Folder>
+      <Folder>
+         <Placemark id="STOCA_99_1">
+            <name/>
+            <visibility>1</visibility>
+            <description>&lt;h3&gt;STOCA&lt;/h3&gt;&lt;br&gt;&lt;/br&gt;&lt;table border="1" padding="2"&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Longitud&lt;/td&gt;&lt;td&gt;-6.149°&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Latitud&lt;/td&gt;&lt;td&gt;35.999°&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</description>
+            <Style>
+               <IconStyle>
+                  <color>FFFFFFFF</color>
+                  <scale>0.5</scale>
+                  <Icon>
+                     <href>http://gmaps-samples.googlecode.com/svn/trunk/markers/orange/blank.png</href>
+                  </Icon>
+               </IconStyle>
+            </Style>
+            <Point id="Point_STOCA_99">
+               <altitudeMode>clampToGround</altitudeMode>
+               <coordinates>-6.149,35.999,1</coordinates>
+            </Point>
+         </Placemark>
+         <name>STOCA_99</name>
+         <id>STOCA_99</id>
+      </Folder>
+      <Folder>
+         <Placemark id="STOCA_100_1">
+            <name/>
+            <visibility>1</visibility>
+            <description>&lt;h3&gt;STOCA&lt;/h3&gt;&lt;br&gt;&lt;/br&gt;&lt;table border="1" padding="2"&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Longitud&lt;/td&gt;&lt;td&gt;-6.213°&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;Latitud&lt;/td&gt;&lt;td&gt;35.916°&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</description>
+            <Style>
+               <IconStyle>
+                  <color>FFFFFFFF</color>
+                  <scale>0.5</scale>
+                  <Icon>
+                     <href>http://gmaps-samples.googlecode.com/svn/trunk/markers/orange/blank.png</href>
+                  </Icon>
+               </IconStyle>
+            </Style>
+            <Point id="Point_STOCA_100">
+               <altitudeMode>clampToGround</altitudeMode>
+               <coordinates>-6.213,35.916,1</coordinates>
+            </Point>
+         </Placemark>
+         <name>STOCA_100</name>
+         <id>STOCA_100</id>
+      </Folder>
+   </Document>
+</kml>

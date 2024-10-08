@@ -1,0 +1,774 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
+<Document>
+	<name>Radiales-Norte_IEO</name>
+	<open>1</open>
+	<StyleMap id="stylemap_id9">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style18</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style32</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="stylemap_id0">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style30</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style4</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="m_ylw-pushpin">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#s_ylw-pushpin</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#s_ylw-pushpin_hl</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="style">
+		<IconStyle>
+			<color>FFFF00FF</color>
+			<scale>0.6</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/paddle/wht-blank.png</href>
+			</Icon>
+		</IconStyle>
+	</Style>
+	<Style id="style0">
+		<IconStyle>
+			<color>FFFF00FF</color>
+			<scale>0.6</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/paddle/wht-blank.png</href>
+			</Icon>
+		</IconStyle>
+	</Style>
+	<StyleMap id="stylemap_id4">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style11</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style22</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="stylemap_id14">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style0</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="style1">
+		<IconStyle>
+			<color>FFFF00FF</color>
+			<scale>0.6</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/paddle/wht-blank.png</href>
+			</Icon>
+		</IconStyle>
+		<ListStyle>
+		</ListStyle>
+	</Style>
+	<Style id="style2">
+		<IconStyle>
+			<color>FFFF00FF</color>
+			<scale>0.6</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/paddle/wht-blank.png</href>
+			</Icon>
+		</IconStyle>
+	</Style>
+	<Style id="style3">
+		<IconStyle>
+			<color>FFFF00FF</color>
+			<scale>0.6</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/paddle/wht-blank.png</href>
+			</Icon>
+		</IconStyle>
+		<ListStyle>
+		</ListStyle>
+	</Style>
+	<StyleMap id="stylemap_id8">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style24</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style17</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="style4">
+		<IconStyle>
+			<color>FFFF00FF</color>
+			<scale>0.6</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/paddle/wht-blank.png</href>
+			</Icon>
+		</IconStyle>
+	</Style>
+	<Style id="style5">
+		<IconStyle>
+			<color>FFFF00FF</color>
+			<scale>0.6</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/paddle/wht-blank.png</href>
+			</Icon>
+		</IconStyle>
+	</Style>
+	<Style id="style6">
+		<IconStyle>
+			<color>FFFF00FF</color>
+			<scale>0.6</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/paddle/wht-blank.png</href>
+			</Icon>
+		</IconStyle>
+	</Style>
+	<Style id="style7">
+		<IconStyle>
+			<color>FFFF00FF</color>
+			<scale>0.6</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/paddle/wht-blank.png</href>
+			</Icon>
+		</IconStyle>
+	</Style>
+	<Style id="style8">
+		<IconStyle>
+			<color>FFFF00FF</color>
+			<scale>0.6</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/paddle/wht-blank.png</href>
+			</Icon>
+		</IconStyle>
+	</Style>
+	<Style id="style9">
+		<IconStyle>
+			<color>FFFF00FF</color>
+			<scale>0.6</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/paddle/wht-blank.png</href>
+			</Icon>
+		</IconStyle>
+	</Style>
+	<Style id="style10">
+		<IconStyle>
+			<color>000000ff</color>
+			<scale>0.6</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/paddle/wht-blank.png</href>
+			</Icon>
+		</IconStyle>
+		<ListStyle>
+		</ListStyle>
+	</Style>
+	<Style id="style11">
+		<IconStyle>
+			<color>FFFF00FF</color>
+			<scale>0.6</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/paddle/wht-blank.png</href>
+			</Icon>
+		</IconStyle>
+	</Style>
+	<StyleMap id="stylemap_id18">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style26</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style19</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="style12">
+		<IconStyle>
+			<color>FFFF00FF</color>
+			<scale>0.6</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/paddle/wht-blank.png</href>
+			</Icon>
+		</IconStyle>
+	</Style>
+	<Style id="style13">
+		<IconStyle>
+			<color>FFFF00FF</color>
+			<scale>0.6</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/paddle/wht-blank.png</href>
+			</Icon>
+		</IconStyle>
+		<ListStyle>
+		</ListStyle>
+	</Style>
+	<Style id="style14">
+		<IconStyle>
+			<color>FFFF00FF</color>
+			<scale>0.6</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/paddle/wht-blank.png</href>
+			</Icon>
+		</IconStyle>
+	</Style>
+	<Style id="style15">
+		<IconStyle>
+			<color>FFFF00FF</color>
+			<scale>0.6</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/paddle/wht-blank.png</href>
+			</Icon>
+		</IconStyle>
+	</Style>
+	<Style id="style16">
+		<IconStyle>
+			<color>FFFF00FF</color>
+			<scale>0.6</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/paddle/wht-blank.png</href>
+			</Icon>
+		</IconStyle>
+	</Style>
+	<Style id="style17">
+		<IconStyle>
+			<color>FFFF00FF</color>
+			<scale>0.6</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/paddle/wht-blank.png</href>
+			</Icon>
+		</IconStyle>
+	</Style>
+	<StyleMap id="stylemap_id1">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style10</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style1</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="style18">
+		<IconStyle>
+			<color>FFFF00FF</color>
+			<scale>0.6</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/paddle/wht-blank.png</href>
+			</Icon>
+		</IconStyle>
+	</Style>
+	<Style id="s_ylw-pushpin_hl">
+		<IconStyle>
+			<color>FFFF00FF</color>
+			<scale>0.709091</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/paddle/wht-blank.png</href>
+			</Icon>
+			<hotSpot x="32" y="1" xunits="pixels" yunits="pixels"/>
+		</IconStyle>
+		<ListStyle>
+			<ItemIcon>
+				<href>http://maps.google.com/mapfiles/kml/paddle/wht-blank-lv.png</href>
+			</ItemIcon>
+		</ListStyle>
+	</Style>
+	<StyleMap id="stylemap_id11">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style28</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style27</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="stylemap_id15">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style21</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style14</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="style19">
+		<IconStyle>
+			<color>FFFF00FF</color>
+			<scale>0.6</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/paddle/wht-blank.png</href>
+			</Icon>
+		</IconStyle>
+	</Style>
+	<StyleMap id="stylemap_id5">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style6</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style23</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="style20">
+		<IconStyle>
+			<color>FFFF00FF</color>
+			<scale>0.6</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/paddle/wht-blank.png</href>
+			</Icon>
+		</IconStyle>
+	</Style>
+	<Style id="style21">
+		<IconStyle>
+			<color>FFFF00FF</color>
+			<scale>0.6</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/paddle/wht-blank.png</href>
+			</Icon>
+		</IconStyle>
+	</Style>
+	<Style id="style22">
+		<IconStyle>
+			<color>FFFF00FF</color>
+			<scale>0.6</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/paddle/wht-blank.png</href>
+			</Icon>
+		</IconStyle>
+	</Style>
+	<StyleMap id="stylemap_id7">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style9</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style31</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="stylemap_id2">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style3</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style13</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="stylemap_id13">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style5</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style20</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="style23">
+		<IconStyle>
+			<color>FFFF00FF</color>
+			<scale>0.6</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/paddle/wht-blank.png</href>
+			</Icon>
+		</IconStyle>
+	</Style>
+	<Style id="style24">
+		<IconStyle>
+			<color>FFFF00FF</color>
+			<scale>0.6</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/paddle/wht-blank.png</href>
+			</Icon>
+		</IconStyle>
+	</Style>
+	<StyleMap id="stylemap_id10">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style15</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style29</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="style25">
+		<IconStyle>
+			<color>FFFF00FF</color>
+			<scale>0.6</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/paddle/wht-blank.png</href>
+			</Icon>
+		</IconStyle>
+	</Style>
+	<StyleMap id="stylemap_id12">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style7</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style8</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="style26">
+		<IconStyle>
+			<color>FFFF00FF</color>
+			<scale>0.6</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/paddle/wht-blank.png</href>
+			</Icon>
+		</IconStyle>
+	</Style>
+	<Style id="style27">
+		<IconStyle>
+			<color>FFFF00FF</color>
+			<scale>0.6</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/paddle/wht-blank.png</href>
+			</Icon>
+		</IconStyle>
+	</Style>
+	<StyleMap id="stylemap_id16">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style25</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style34</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="style28">
+		<IconStyle>
+			<color>FFFF00FF</color>
+			<scale>0.6</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/paddle/wht-blank.png</href>
+			</Icon>
+		</IconStyle>
+	</Style>
+	<Style id="style29">
+		<IconStyle>
+			<color>FFFF00FF</color>
+			<scale>0.6</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/paddle/wht-blank.png</href>
+			</Icon>
+		</IconStyle>
+	</Style>
+	<StyleMap id="stylemap_id3">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style2</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style33</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="style30">
+		<IconStyle>
+			<color>FFFF00FF</color>
+			<scale>0.6</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/paddle/wht-blank.png</href>
+			</Icon>
+		</IconStyle>
+	</Style>
+	<Style id="style31">
+		<IconStyle>
+			<color>FFFF00FF</color>
+			<scale>0.6</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/paddle/wht-blank.png</href>
+			</Icon>
+		</IconStyle>
+	</Style>
+	<Style id="style32">
+		<IconStyle>
+			<color>FFFF00FF</color>
+			<scale>0.6</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/paddle/wht-blank.png</href>
+			</Icon>
+		</IconStyle>
+	</Style>
+	<Style id="style33">
+		<IconStyle>
+			<color>FFFF00FF</color>
+			<scale>0.6</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/paddle/wht-blank.png</href>
+			</Icon>
+		</IconStyle>
+	</Style>
+	<StyleMap id="stylemap_id6">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#style12</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#style16</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="style34">
+		<IconStyle>
+			<color>FFFF00FF</color>
+			<scale>0.6</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/paddle/wht-blank.png</href>
+			</Icon>
+		</IconStyle>
+	</Style>
+	<Style id="s_ylw-pushpin">
+		<IconStyle>
+			<color>FFFF00FF</color>
+			<scale>0.6</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/paddle/wht-blank.png</href>
+			</Icon>
+			<hotSpot x="32" y="1" xunits="pixels" yunits="pixels"/>
+		</IconStyle>
+		<ListStyle>
+			<ItemIcon>
+				<href>http://maps.google.com/mapfiles/kml/paddle/wht-blank-lv.png</href>
+			</ItemIcon>
+		</ListStyle>
+	</Style>
+	<Folder id="Norte(VI)_1">
+		<name>Norte(VI)_1</name>
+		<Style>
+			<ListStyle>
+				<listItemType>check</listItemType>
+				<bgColor>00ffffff</bgColor>
+				<maxSnippetLines>2</maxSnippetLines>
+			</ListStyle>
+		</Style>
+		<Placemark id="Norte(VI)_1_1">
+			<description><![CDATA[<h3>Radiales-Norte(VI)</h3><br></br><table border="1" padding="2"></tr><tr><td>Longitud</td><td>-8.795°</td></tr><tr><td>Latitud</td><td>42.222°</td></tr></table>Más Info:<a href="http://www.seriestemporales-ieo.com/">http://www.seriestemporales-ieo.com/</a>;]]></description>
+			<styleUrl>#m_ylw-pushpin</styleUrl>
+			<Point id="Point_Norte(VI)_1">
+				<coordinates>-8.795,42.222,1</coordinates>
+			</Point>
+		</Placemark>
+	</Folder>
+	<Folder id="Norte(VI)_2">
+		<name>Norte(VI)_2</name>
+		<open>1</open>
+		<Placemark id="Norte(VI)_2_1">
+			<description><![CDATA[<h3>Radiales-Norte(VI)</h3><br></br><table border="1" padding="2"></tr><tr><td>Longitud</td><td>-8.85°</td></tr><tr><td>Latitud</td><td>42.213°</td></tr></table>Más Info:<a href="http://www.seriestemporales-ieo.com/">http://www.seriestemporales-ieo.com/</a>;]]></description>
+			<styleUrl>#stylemap_id0</styleUrl>
+			<Point id="Point_Norte(VI)_2">
+				<coordinates>-8.85,42.213,1</coordinates>
+			</Point>
+		</Placemark>
+	</Folder>
+	<Folder id="Norte(VI)_3">
+		<name>Norte(VI)_3</name>
+		<open>1</open>
+		<Placemark id="Norte(VI)_3_1">
+			<description><![CDATA[<h3>Radiales-Norte(VI)</h3><br></br><table border="1" padding="2"></tr><tr><td>Longitud</td><td>-8.958°</td></tr><tr><td>Latitud</td><td>42.142°</td></tr></table>Más Info:<a href="http://www.seriestemporales-ieo.com/">http://www.seriestemporales-ieo.com/</a>;]]></description>
+			<styleUrl>#stylemap_id1</styleUrl>
+			<Point id="Point_Norte(VI)_3">
+				<coordinates>-8.958,42.142,1</coordinates>
+			</Point>
+		</Placemark>
+	</Folder>
+	<Folder id="Norte(VI)_4">
+		<name>Norte(VI)_4</name>
+		<open>1</open>
+		<Placemark id="Norte(VI)_4_1">
+			<description><![CDATA[<h3>Radiales-Norte(VI)</h3><br></br><table border="1" padding="2"></tr><tr><td>Longitud</td><td>-9.125°</td></tr><tr><td>Latitud</td><td>42.13°</td></tr></table>Más Info:<a href="http://www.seriestemporales-ieo.com/">http://www.seriestemporales-ieo.com/</a>;]]></description>
+			<styleUrl>#stylemap_id2</styleUrl>
+			<Point id="Point_Norte(VI)_4">
+				<coordinates>-9.125,42.13,1</coordinates>
+			</Point>
+		</Placemark>
+	</Folder>
+	<Folder id="Norte(CO)_5">
+		<name>Norte(CO)_5</name>
+		<open>1</open>
+		<Placemark id="Norte(CO)_5_1">
+			<description><![CDATA[<h3>Radiales-Norte(CO)</h3><br></br><table border="1" padding="2"></tr><tr><td>Longitud</td><td>-8.37°</td></tr><tr><td>Latitud</td><td>43.363°</td></tr></table>Más Info:<a href="http://www.seriestemporales-ieo.com/">http://www.seriestemporales-ieo.com/</a>;]]></description>
+			<styleUrl>#stylemap_id3</styleUrl>
+			<Point id="Point_Norte(CO)_5">
+				<coordinates>-8.369999999999999,43.363,1</coordinates>
+			</Point>
+		</Placemark>
+	</Folder>
+	<Folder id="Norte(CO)_6">
+		<name>Norte(CO)_6</name>
+		<open>1</open>
+		<Placemark id="Norte(CO)_6_1">
+			<description><![CDATA[<h3>Radiales-Norte(CO)</h3><br></br><table border="1" padding="2"></tr><tr><td>Longitud</td><td>-8.383°</td></tr><tr><td>Latitud</td><td>43.388°</td></tr></table>Más Info:<a href="http://www.seriestemporales-ieo.com/">http://www.seriestemporales-ieo.com/</a>;]]></description>
+			<styleUrl>#stylemap_id4</styleUrl>
+			<Point id="Point_Norte(CO)_6">
+				<coordinates>-8.382999999999999,43.388,1</coordinates>
+			</Point>
+		</Placemark>
+	</Folder>
+	<Folder id="Norte(CO)_7">
+		<name>Norte(CO)_7</name>
+		<open>1</open>
+		<Placemark id="Norte(CO)_7_1">
+			<description><![CDATA[<h3>Radiales-Norte(CO)</h3><br></br><table border="1" padding="2"></tr><tr><td>Longitud</td><td>-8.4°</td></tr><tr><td>Latitud</td><td>43.393°</td></tr></table>Más Info:<a href="http://www.seriestemporales-ieo.com/">http://www.seriestemporales-ieo.com/</a>;]]></description>
+			<styleUrl>#stylemap_id5</styleUrl>
+			<Point id="Point_Norte(CO)_7">
+				<coordinates>-8.4,43.393,1</coordinates>
+			</Point>
+		</Placemark>
+	</Folder>
+	<Folder id="Norte(CO)_8">
+		<name>Norte(CO)_8</name>
+		<open>1</open>
+		<Placemark id="Norte(CO)_8_1">
+			<description><![CDATA[<h3>Radiales-Norte(CO)</h3><br></br><table border="1" padding="2"></tr><tr><td>Longitud</td><td>-8.417°</td></tr><tr><td>Latitud</td><td>43.407°</td></tr></table>Más Info:<a href="http://www.seriestemporales-ieo.com/">http://www.seriestemporales-ieo.com/</a>;]]></description>
+			<styleUrl>#stylemap_id6</styleUrl>
+			<Point id="Point_Norte(CO)_8">
+				<coordinates>-8.417,43.407,1</coordinates>
+			</Point>
+		</Placemark>
+	</Folder>
+	<Folder id="Norte(CO)_9">
+		<name>Norte(CO)_9</name>
+		<open>1</open>
+		<Placemark id="Norte(CO)_9_1">
+			<description><![CDATA[<h3>Radiales-Norte(CO)</h3><br></br><table border="1" padding="2"></tr><tr><td>Longitud</td><td>-8.437°</td></tr><tr><td>Latitud</td><td>43.422°</td></tr></table>Más Info:<a href="http://www.seriestemporales-ieo.com/">http://www.seriestemporales-ieo.com/</a>;]]></description>
+			<styleUrl>#stylemap_id7</styleUrl>
+			<Point id="Point_Norte(CO)_9">
+				<coordinates>-8.436999999999999,43.422,1</coordinates>
+			</Point>
+		</Placemark>
+	</Folder>
+	<Folder id="Norte(CU)_10">
+		<name>Norte(CU)_10</name>
+		<open>1</open>
+		<Placemark id="Norte(CU)_10_1">
+			<description><![CDATA[<h3>Radiales-Norte(CU)</h3><br></br><table border="1" padding="2"></tr><tr><td>Longitud</td><td>-6.133°</td></tr><tr><td>Latitud</td><td>43.6°</td></tr></table>Más Info:<a href="http://www.seriestemporales-ieo.com/">http://www.seriestemporales-ieo.com/</a>;]]></description>
+			<styleUrl>#stylemap_id8</styleUrl>
+			<Point id="Point_Norte(CU)_10">
+				<coordinates>-6.132999999999999,43.6,1</coordinates>
+			</Point>
+		</Placemark>
+	</Folder>
+	<Folder id="Norte(CU)_11">
+		<name>Norte(CU)_11</name>
+		<open>1</open>
+		<Placemark id="Norte(CU)_11_1">
+			<description><![CDATA[<h3>Radiales-Norte(CU)</h3><br></br><table border="1" padding="2"></tr><tr><td>Longitud</td><td>-6.15°</td></tr><tr><td>Latitud</td><td>43.7°</td></tr></table>Más Info:<a href="http://www.seriestemporales-ieo.com/">http://www.seriestemporales-ieo.com/</a>;]]></description>
+			<styleUrl>#stylemap_id9</styleUrl>
+			<Point id="Point_Norte(CU)_11">
+				<coordinates>-6.150000000000001,43.7,1</coordinates>
+			</Point>
+		</Placemark>
+	</Folder>
+	<Folder id="Norte(CU)_12">
+		<name>Norte(CU)_12</name>
+		<open>1</open>
+		<Placemark id="Norte(CU)_12_1">
+			<description><![CDATA[<h3>Radiales-Norte(CU)</h3><br></br><table border="1" padding="2"></tr><tr><td>Longitud</td><td>-6.167°</td></tr><tr><td>Latitud</td><td>43.767°</td></tr></table>Más Info:<a href="http://www.seriestemporales-ieo.com/">http://www.seriestemporales-ieo.com/</a>;]]></description>
+			<styleUrl>#stylemap_id10</styleUrl>
+			<Point id="Point_Norte(CU)_12">
+				<coordinates>-6.167,43.767,1</coordinates>
+			</Point>
+		</Placemark>
+	</Folder>
+	<Folder id="Norte(GI)_13">
+		<name>Norte(GI)_13</name>
+		<open>1</open>
+		<Placemark id="Norte(GI)_13_1">
+			<description><![CDATA[<h3>Radiales-Norte(GI)</h3><br></br><table border="1" padding="2"></tr><tr><td>Longitud</td><td>-5.607°</td></tr><tr><td>Latitud</td><td>43.58°</td></tr></table>Más Info:<a href="http://www.seriestemporales-ieo.com/">http://www.seriestemporales-ieo.com/</a>;]]></description>
+			<styleUrl>#stylemap_id11</styleUrl>
+			<Point id="Point_Norte(GI)_13">
+				<coordinates>-5.607,43.58,1</coordinates>
+			</Point>
+		</Placemark>
+	</Folder>
+	<Folder id="Norte(GI)_14">
+		<name>Norte(GI)_14</name>
+		<open>1</open>
+		<Placemark id="Norte(GI)_14_1">
+			<description><![CDATA[<h3>Radiales-Norte(GI)</h3><br></br><table border="1" padding="2"></tr><tr><td>Longitud</td><td>-5.578°</td></tr><tr><td>Latitud</td><td>43.675°</td></tr></table>Más Info:<a href="http://www.seriestemporales-ieo.com/">http://www.seriestemporales-ieo.com/</a>;]]></description>
+			<styleUrl>#stylemap_id12</styleUrl>
+			<Point id="Point_Norte(GI)_14">
+				<coordinates>-5.578,43.675,1</coordinates>
+			</Point>
+		</Placemark>
+	</Folder>
+	<Folder id="Norte(GI)_15">
+		<name>Norte(GI)_15</name>
+		<open>1</open>
+		<Placemark id="Norte(GI)_15_1">
+			<description><![CDATA[<h3>Radiales-Norte(GI)</h3><br></br><table border="1" padding="2"></tr><tr><td>Longitud</td><td>-5.547°</td></tr><tr><td>Latitud</td><td>43.778°</td></tr></table>Más Info:<a href="http://www.seriestemporales-ieo.com/">http://www.seriestemporales-ieo.com/</a>;]]></description>
+			<styleUrl>#stylemap_id13</styleUrl>
+			<Point id="Point_Norte(GI)_15">
+				<coordinates>-5.547,43.778,1</coordinates>
+			</Point>
+		</Placemark>
+	</Folder>
+	<Folder id="Norte(SA)_16">
+		<name>Norte(SA)_16</name>
+		<open>1</open>
+		<Placemark id="Norte(SA)_16_1">
+			<description><![CDATA[<h3>Radiales-Norte(SA)</h3><br></br><table border="1" padding="2"></tr><tr><td>Longitud</td><td>-3.783°</td></tr><tr><td>Latitud</td><td>43.5°</td></tr></table>Más Info:<a href="http://www.seriestemporales-ieo.com/">http://www.seriestemporales-ieo.com/</a>;]]></description>
+			<styleUrl>#stylemap_id14</styleUrl>
+			<Point id="Point_Norte(SA)_16">
+				<coordinates>-3.783,43.5,1</coordinates>
+			</Point>
+		</Placemark>
+	</Folder>
+	<Folder id="Norte(SA)_17">
+		<name>Norte(SA)_17</name>
+		<open>1</open>
+		<Placemark id="Norte(SA)_17_1">
+			<description><![CDATA[<h3>Radiales-Norte(SA)</h3><br></br><table border="1" padding="2"></tr><tr><td>Longitud</td><td>-3.783°</td></tr><tr><td>Latitud</td><td>43.573°</td></tr></table>Más Info:<a href="http://www.seriestemporales-ieo.com/">http://www.seriestemporales-ieo.com/</a>;]]></description>
+			<styleUrl>#stylemap_id15</styleUrl>
+			<Point id="Point_Norte(SA)_17">
+				<coordinates>-3.783,43.573,1</coordinates>
+			</Point>
+		</Placemark>
+	</Folder>
+	<Folder id="Norte(SA)_18">
+		<name>Norte(SA)_18</name>
+		<open>1</open>
+		<Placemark id="Norte(SA)_18_1">
+			<description><![CDATA[<h3>Radiales-Norte(SA)</h3><br></br><table border="1" padding="2"></tr><tr><td>Longitud</td><td>-3.783°</td></tr><tr><td>Latitud</td><td>43.71°</td></tr></table>Más Info:<a href="http://www.seriestemporales-ieo.com/">http://www.seriestemporales-ieo.com/</a>;]]></description>
+			<styleUrl>#stylemap_id16</styleUrl>
+			<Point id="Point_Norte(SA)_18">
+				<coordinates>-3.783,43.71,1</coordinates>
+			</Point>
+		</Placemark>
+	</Folder>
+	<Folder id="Norte(SA)_19">
+		<name>Norte(SA)_19</name>
+		<open>1</open>
+		<Placemark id="Norte(SA)_19_1">
+			<description><![CDATA[<h3>Radiales-Norte(SA)</h3><br></br><table border="1" padding="2"></tr><tr><td>Longitud</td><td>-3.783°</td></tr><tr><td>Latitud</td><td>43.8°</td></tr></table>Más Info:<a href="http://www.seriestemporales-ieo.com/">http://www.seriestemporales-ieo.com/</a>;]]></description>
+			<styleUrl>#stylemap_id18</styleUrl>
+			<Point id="Point_Norte(SA)_19">
+				<coordinates>-3.783,43.8,1</coordinates>
+			</Point>
+		</Placemark>
+	</Folder>
+</Document>
+</kml>
