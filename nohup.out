@@ -1,0 +1,24 @@
+>>>>> reading data /data/pvb/Climatologias/Glorys/cmems_mod_glo_phy_my_0.083_P1M-m_202311/
+>>>>> Demarcación marina canaria
+>>>>> Region Demarcación marina canaria
+>>>>> calculando perfile
+Traceback (most recent call last):
+  File "/home/pvb/Analisis/IEOOSWebPage/analisisDemarcacion_GLORYS.py", line 172, in <module>
+    ax[1].plot(DC_salt.stack(flat_dim=('lon', 'lat','time')),DC_temp.depth, color='lightgrey')
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/envs/ocean/lib/python3.11/site-packages/xarray/core/dataarray.py", line 2856, in stack
+    ds = self._to_temp_dataset().stack(
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/envs/ocean/lib/python3.11/site-packages/xarray/core/dataset.py", line 5279, in stack
+    result = result._stack_once(dims, new_dim, index_cls, create_index)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/envs/ocean/lib/python3.11/site-packages/xarray/core/dataset.py", line 5193, in _stack_once
+    shape = [self.sizes[d] for d in vdims]
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/envs/ocean/lib/python3.11/site-packages/xarray/core/dataset.py", line 5193, in <listcomp>
+    shape = [self.sizes[d] for d in vdims]
+             ~~~~~~~~~~^^^
+  File "/opt/conda/envs/ocean/lib/python3.11/site-packages/xarray/core/utils.py", line 427, in __getitem__
+    return self.mapping[key]
+           ~~~~~~~~~~~~^^^^^
+KeyError: 'lon'
