@@ -45,5 +45,5 @@ GMTamanoArgoIb=[700,650];
 %% Ftp
 ftp_dir='/html/IEOOS';
 ftp_dir_SST='/html/IEOOS/SST';
-ftp_dir_status='/html/IEOOS/html_files';
+ftp_dir_status='/html/IEOOS';
 

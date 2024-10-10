@@ -8,5 +8,6 @@
 prueba*
 Prueba*
 Info/*
-Data/*
+Data/*.mat
+Data/*.kml
 .ipynb_checkpoints/*
