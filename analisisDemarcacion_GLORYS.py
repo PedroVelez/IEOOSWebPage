@@ -50,6 +50,8 @@ yearC2='2000'
 for iD in range(1,5):
    titulo = Titulos[iD]
    titulo_short = Titulos_short[iD]
+   print('>>>>> '+titulo)
+   
    # Load the data from the .txt file
    demCoord = []
    longDem, latiDem = [], []
@@ -71,7 +73,7 @@ for iD in range(1,5):
    meanTemp=DC_temp.mean('time').sel(depth=10, method='nearest')
    meanTemp_unmasked=DC_temp_unmasked.mean('time').sel(depth=10, method='nearest')
 
-   print('>>>>> mapa')
+   print('         > mapa')
    
    fig = plt.figure(figsize=(14,8))
    ax = plt.axes(projection=ccrs.Robinson())
@@ -90,7 +92,7 @@ for iD in range(1,5):
    plt.savefig(imageDir+'/'+titulo_short+'_temp_promedio'+'10'+'.png')
 
 # Calculos promedios
-   print('>>>>> calculando perfiles')
+   print('         > calculando perfiles')
 
    prof_mean_temp = DC_temp.stack(flat_dim=('longitude', 'latitude','time')).mean('flat_dim')
    prof_std_temp  = DC_temp.stack(flat_dim=('longitude', 'latitude','time')).std('flat_dim')
@@ -98,9 +100,8 @@ for iD in range(1,5):
    prof_std_salt  = DC_salt.stack(flat_dim=('longitude', 'latitude','time')).std('flat_dim')
 
 # Perfiles
-   print('>>>>> figura perfiles')
+   print('         > figura perfiles')
    fig,ax= plt.subplots(1,2,figsize=(14,8))
-   ax[0].plot(DC_temp.stack(flat_dim=('longitude', 'latitude','time')),DC_temp.depth, color='lightgrey')
    ax[0].plot(prof_mean_temp,prof_mean_temp.depth,color='blue')  
    ax[0].plot(prof_mean_temp+1.5*prof_std_temp,prof_mean_temp.depth,color='red')  
    ax[0].plot(prof_mean_temp-1.5*prof_std_temp,prof_mean_temp.depth,color='red')  
@@ -109,7 +110,6 @@ for iD in range(1,5):
    ax[0].grid()
    ax[0].set_title(titulo_short+' perfil Temperatura');
 
-   ax[1].plot(DC_salt.stack(flat_dim=('lon', 'lat','time')),DC_temp.depth, color='lightgrey')
    ax[1].plot(prof_mean_salt,prof_mean_temp.depth,color='blue')  
    ax[1].plot(prof_mean_salt+1.5*prof_std_salt,prof_mean_salt.depth,color='red')  
    ax[1].plot(prof_mean_salt-1.5*prof_std_salt,prof_mean_salt.depth,color='red')  
@@ -119,9 +119,8 @@ for iD in range(1,5):
    ax[1].set_title(titulo_short+' perfil Salinidad');
    plt.savefig(imageDir+'/'+titulo_short+'_perfiles_T_S_promedio.png')
    
-
 ## Seasonal cycle
-   print('>>>>> calculando seasonal')
+   print('         > calculando seasonal')
 	# Create monthly climatology
    DC_temp_clim = DC_temp.sel(time=slice(yearC1,yearC2)).groupby('time.month').mean(dim='time').load();
    DC_salt_clim = DC_salt.sel(time=slice(yearC1,yearC2)).groupby('time.month').mean(dim='time').load();
@@ -144,7 +143,7 @@ for iD in range(1,5):
    plt.savefig(imageDir+'/'+titulo_short+'_climatologia_T_'+yearC1+'_'+yearC2+'.png')
 
 # Weighted horizontal mean
-   print('>>>>> promedios por area ')
+   print('         > promedios por area ')
 
    weights = np.cos(np.deg2rad(DC_temp.latitude))
    weights = weights/weights.max()
@@ -177,7 +176,7 @@ for iD in range(1,5):
    plt.savefig(imageDir+'/'+titulo_short+'_SeccionTemporal_T.png')
 
 # Smoothed versions
-   print('>>>>> interpolo cada m')
+   print('         > interpolo cada m')
    depthi = np.arange(10,4000.5,10)
    DCi_temp_wmean = DC_temp_wmean.interp(depth=depthi)
    DCi_salt_wmean = DC_temp_wmean.interp(depth=depthi)
