@@ -5,6 +5,7 @@
 *.swp
 *.log
 *.nc
+*.png
 prueba*
 Prueba*
 Info/*

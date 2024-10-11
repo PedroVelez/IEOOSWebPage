@@ -46,4 +46,5 @@ GMTamanoArgoIb=[700,650];
 ftp_dir='/html/IEOOS';
 ftp_dir_SST='/html/IEOOS/SST';
 ftp_dir_status='/html/IEOOS';
+ftp_dir_clim='/html/IEOOS/Clim';
 
