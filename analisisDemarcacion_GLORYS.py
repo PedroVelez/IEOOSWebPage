@@ -47,7 +47,7 @@ yearC2='2000'
 
 
 # Load the demarcation data
-for iD in range(1,5):
+for iD in range(0,5):
    titulo = Titulos[iD]
    titulo_short = Titulos_short[iD]
    print('>>>>> '+titulo)
@@ -75,7 +75,7 @@ for iD in range(1,5):
 
    print('         > mapa')
    
-   fig = plt.figure(figsize=(14,8))
+   fig = plt.figure(figsize=(8,8))
    ax = plt.axes(projection=ccrs.Robinson())
 
    ax.contour(meanTemp_unmasked.longitude,meanTemp_unmasked.latitude,meanTemp_unmasked,10,colors='k', transform=ccrs.PlateCarree())
@@ -88,8 +88,9 @@ for iD in range(1,5):
    ax.gridlines(draw_labels=True, linewidth=.5,color='gray', alpha=0.5, linestyle='--')
 
    ax.top_labels = ax.right_labels = False
-   ax.set_title('Temperatura promedio a '+'10 '+'para la '+titulo);
+   #ax.set_title('Temperatura promedio a '+'10 '+'para la '+titulo);
    plt.savefig(imageDir+'/'+titulo_short+'_temp_promedio'+'10'+'.png')
+   plt.close(fig)
 
 # Calculos promedios
    print('         > calculando perfiles')
@@ -108,7 +109,7 @@ for iD in range(1,5):
    ax[0].invert_yaxis()
    ax[0].set_ylim([2000,0]);
    ax[0].grid()
-   ax[0].set_title(titulo_short+' perfil Temperatura');
+   #ax[0].set_title(titulo_short+' perfil Temperatura');
 
    ax[1].plot(prof_mean_salt,prof_mean_temp.depth,color='blue')  
    ax[1].plot(prof_mean_salt+1.5*prof_std_salt,prof_mean_salt.depth,color='red')  
@@ -116,8 +117,9 @@ for iD in range(1,5):
    ax[1].invert_yaxis()
    ax[1].set_ylim([2000,0]);
    ax[1].grid()
-   ax[1].set_title(titulo_short+' perfil Salinidad');
+   #ax[1].set_title(titulo_short+' perfil Salinidad');
    plt.savefig(imageDir+'/'+titulo_short+'_perfiles_T_S_promedio.png')
+   plt.close(fig)
    
 ## Seasonal cycle
    print('         > calculando seasonal')
@@ -133,8 +135,7 @@ for iD in range(1,5):
    fig, ax = plt.subplots(1, 1 , figsize=(5,5))
    ax.contourf(DC_temp_clim.mean(dim='longitude').sel(depth=10, method='nearest').month,
       DC_temp_clim.mean(dim='longitude').sel(depth=10, method='nearest').latitude,
-      DC_temp_clim.mean(dim='longitude').sel(depth=10, method='nearest').transpose(),
-      levels=12, vmin=-2, vmax=30)
+      DC_temp_clim.mean(dim='longitude').sel(depth=10, method='nearest').transpose(),30,cmap = plt.cm.RdBu.reversed())
    ax.grid()
    ax.set_ylabel('Latitud') 
    ax.set_xlabel('Mes')
@@ -158,10 +159,10 @@ for iD in range(1,5):
    DC_salt_anom_wmean = DC_salt_anom_weighted.mean(("longitude", "latitude"),skipna=True).load()
 
 
-   fig, ax = plt.subplots(2, 1 , sharex=True, figsize=(10,8))
+   fig, ax = plt.subplots(2, 1 , sharex=True, figsize=(14,8))
    ax[0].contourf(DC_temp_wmean.time, DC_temp_wmean.depth, 
-  DC_temp_wmean.transpose(), 32)
-   ax[0].set_title('Variacion temporal Temperatura promedio')
+  DC_temp_wmean.transpose(), 32,cmap = plt.cm.RdBu.reversed())
+   #ax[0].set_title('Variacion temporal Temperatura promedio')
    ax[0].set_ylabel('Presión') 
    ax[0].invert_yaxis()
    ax[0].set_ylim([200,0]);
@@ -169,11 +170,11 @@ for iD in range(1,5):
    ax[1].contourf(DC_temp_wmean.time, DC_temp_wmean.depth, 
   DC_temp_wmean.transpose(), 32)
    ax[1].set_ylabel('Presión') 
-   ax[1].set_xlabel('Año')
    ax[1].invert_yaxis()
    ax[1].set_ylim([2000,200]);
    fig.tight_layout()
    plt.savefig(imageDir+'/'+titulo_short+'_SeccionTemporal_T.png')
+   plt.close(fig)
 
 # Smoothed versions
    print('         > interpolo cada m')
@@ -190,7 +191,7 @@ for iD in range(1,5):
 
 
    Posiciones=[(0.10, 0.65, 0.8, 0.22), (0.10, 0.48, 0.8, 0.165),(0.10, 0.10, 0.8, 0.378)]
-   fig, ax = plt.subplots(3,1,figsize = (12,15),sharex=True)
+   fig, ax = plt.subplots(3,1,figsize = (14,15),sharex=True)
 
    # Mean values
    ax[0].plot(DCi_temp_anom_wmean.time[-2],
@@ -270,6 +271,7 @@ DCi_temp_anom_wmean.sel(depth=slice(10,800)).transpose(), 40, cmap='RdBu_r')
    ax[2].set_xticks(pd.date_range(start="1995-01-01", end="2025-01-01",freq='2YS-JAN'));
    ax[2].set_xticklabels(pd.date_range(start="1995-01-01", end="2025-01-01",freq='2YS-JAN').strftime('%Y'));
    plt.savefig(imageDir+'/'+titulo_short+'_temp_promedio_capas_contorno.png')
+   plt.close(fig)
 
    # Create a Dataset from the DataArrays
    Glorys_means = xr.Dataset({
@@ -286,7 +288,7 @@ DCi_temp_anom_wmean.sel(depth=slice(10,800)).transpose(), 40, cmap='RdBu_r')
 
 
 # 
-   fig, ax = plt.subplots(2,1, figsize=(10,12))
+   fig, ax = plt.subplots(2,1, figsize=(14,12))
    # Mean values
    media=DCi_temp_wmean.sel(depth=slice(200,2600)).mean("depth").mean('time')
    ax[0].plot(DCi_temp_wmean.time[-2],

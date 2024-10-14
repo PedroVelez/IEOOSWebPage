@@ -8,6 +8,7 @@
 *.png
 prueba*
 Prueba*
+images/*
 Info/*
 Data/*.mat
 Data/*.kml

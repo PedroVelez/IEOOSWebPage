@@ -19,11 +19,11 @@ os.chdir(imagesDir)
 
 ## Demarcaciones
 session = ftplib.FTP('ftp.oceanografia.es',userFTP,passwdFTP)
-session.cwd('/html/IEOOS/reanalisis/images')
+session.cwd('/html/IEOOS/Clim/images')
 
 filenames = glob.glob(imagesDir+'/*.png')
 for filename in filenames:
-    print('https://www.oceanografia.es/IEOOS/reanalisis/images/'+filename.split('/')[-1])
+    print('https://www.oceanografia.es/IEOOS/Clim/images/'+filename.split('/')[-1])
     session.storbinary('STOR '+ filename.split('/')[-1], open(filename, 'rb'))
 
 session.quit()    
