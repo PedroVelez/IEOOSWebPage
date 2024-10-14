@@ -5,19 +5,25 @@ load Globales
 configIEOOS
 titulo="Sistema de observacion oceánica del IEO";
 
-
-%CAN_perfiles_T_S_promedio.png
-%CAN_SeccionTemporal_T.png
-%CAN_temp_promedio_capas_contorno.png
-
 %% Inicio
 for iDem=1:1:5;
     FileHtmlClim=strcat(PaginaWebDir,'/html/','Clim_',Demarcaciones{1,iDem},'.html');
 
     fig1=strcat(Demarcaciones{1,iDem},'_temp_promedio10.png');
+    text1='Temperatura promedio a 10 m de profundidad';
+    
     fig2=strcat(Demarcaciones{1,iDem},'_perfiles_T_S_promedio.png');
+    text2='Variación con la profundidad del promedio de Temperatura y Salinidad';
+    
     fig3=strcat(Demarcaciones{1,iDem},'_SeccionTemporal_T.png');
+    text3='Variación temporal de Temperatura promedio';
+    
     fig4=strcat(Demarcaciones{1,iDem},'_temp_promedio_capas_contorno.png');
+    text4='Variación temporal de anomalia de Temperatura promedio';
+    
+    fig5=strcat(Demarcaciones{1,iDem},'_temp_promedio_capas.png');
+    text5='Variación temporal de Temperatura promedio';
+
 
     fprintf('>>>>> %s\n',mfilename)
     fid = fopen(FileHtmlClim,'w');
@@ -52,29 +58,36 @@ for iDem=1:1:5;
     fprintf(fid,'	<div class="container">\n');
     fprintf(fid,'		<div class="blog">\n');
     fprintf(fid,'			<div class="top-blog">\n');
-    fprintf(fid,'				<h2>Temperatura superficial del mar en la Demarcación %s</h2>\n',Demarcaciones{2,iDem});
+    fprintf(fid,'				<h2>Temperatura del mar en la Demarcación %s</h2>\n',Demarcaciones{2,iDem});
     fprintf(fid,'			</div>\n');
     fprintf(fid,'			<br>\n');
-    fprintf(fid,'			<p>Los datos de ... </a></p>\n');
+    fprintf(fid,'			<p>Los datos de temperatura en toda la columna de agua para la demarcación de %s, obtenidos a partir de la informacion que provee COPERNICUS</a></p>\n',Demarcaciones{2,iDem});
     fprintf(fid,'			<br>\n');
-    fprintf(fid,'			<div class="top-blog"></div>\n');
-    fprintf(fid,'			<a href="https://www.oceanografia.es/IEOOS/Clim/images/%s"><img class="img-responsive" \n',fig1);
-    fprintf(fid,'                    src="https://www.oceanografia.es/IEOOS/Clim/images/%s" \n',fig1);
-    fprintf(fid,'					alt="" /></a><br>\n');
-    fprintf(fid,'					<p>...</p>\n');
-    fprintf(fid,'			<br>\n');
-
     fprintf(fid,'<!--Inicios items -->\n');
     fprintf(fid,'			<div class="blog-head">\n');
+
     fprintf(fid,'<!-------->\n');
     fprintf(fid,'				<div class="col-md-12 blog-bottom">\n');
     fprintf(fid,'					<div class=" blog-top">\n');
+    fprintf(fid,'						<div class="blog-grid">\n');
+    fprintf(fid,'							<h3><center>%s</center></h3>\n',text1);
+    fprintf(fid,'							<p></p>\n');
+    fprintf(fid,'						</div>\n');
+    fprintf(fid,'						<a href="https://www.oceanografia.es/IEOOS/Clim/images/%s"><img class="img-responsive"\n',fig1);
+    fprintf(fid,'								src="https://www.oceanografia.es/IEOOS/Clim/images/%s" alt="" /></a>\n',fig1);
+    fprintf(fid,'					</div>\n');
+    fprintf(fid,'				</div>\n');
+    fprintf(fid,'<!----\n');
+
+    fprintf(fid,'<!-------->\n');
+    fprintf(fid,'				<div class="col-md-12 blog-bottom">\n');
+    fprintf(fid,'					<div class=" blog-top">\n');
+    fprintf(fid,'						<div class="blog-grid">\n');
+    fprintf(fid,'							<h3><center>%s</center></h3>\n',text2);
+    fprintf(fid,'							<p></p>\n');
+    fprintf(fid,'						</div>\n');
     fprintf(fid,'						<a href="https://www.oceanografia.es/IEOOS/Clim/images/%s"><img class="img-responsive"\n',fig2);
     fprintf(fid,'								src="https://www.oceanografia.es/IEOOS/Clim/images/%s" alt="" /></a>\n',fig2);
-    fprintf(fid,'						<div class="blog-grid">\n');
-    fprintf(fid,'							<h3>... </h3>\n');
-    fprintf(fid,'							<p></p>\n');
-    fprintf(fid,'						</div>\n');
     fprintf(fid,'					</div>\n');
     fprintf(fid,'				</div>\n');
     fprintf(fid,'<!----\n');
@@ -82,12 +95,12 @@ for iDem=1:1:5;
     fprintf(fid,'<!-------->\n');
     fprintf(fid,'				<div class="col-md-12 blog-bottom">\n');
     fprintf(fid,'					<div class=" blog-top">\n');
+    fprintf(fid,'						<div class="blog-grid">\n');
+    fprintf(fid,'							<h3><center>%s</center></h3>\n',text3);
+    fprintf(fid,'							<p></p>\n');
+    fprintf(fid,'						</div>\n');
     fprintf(fid,'						<a href="https://www.oceanografia.es/IEOOS/Clim/images/%s"><img class="img-responsive"\n',fig3);
     fprintf(fid,'								src="https://www.oceanografia.es/IEOOS/Clim/images/%s" alt="" /></a>\n',fig3);
-    fprintf(fid,'						<div class="blog-grid">\n');
-    fprintf(fid,'							<h3>... </h3>\n');
-    fprintf(fid,'							<p></p>\n');
-    fprintf(fid,'						</div>\n');
     fprintf(fid,'					</div>\n');
     fprintf(fid,'				</div>\n');
     fprintf(fid,'<!----\n');
@@ -95,16 +108,28 @@ for iDem=1:1:5;
     fprintf(fid,'<!-------->\n');
     fprintf(fid,'				<div class="col-md-12 blog-bottom">\n');
     fprintf(fid,'					<div class=" blog-top">\n');
-    fprintf(fid,'						<a href="https://www.oceanografia.es/IEOOS/Clim/images/%s"><img class="img-responsive"\n',fig4);
-    fprintf(fid,'								src="https://www.oceanografia.es/IEOOS/Clim/images/%s" alt="" /></a>\n',fig4);
     fprintf(fid,'						<div class="blog-grid">\n');
-    fprintf(fid,'							<h3>... </h3>\n');
+    fprintf(fid,'							<h3><center>%s</center></h3>\n',text4);
     fprintf(fid,'							<p></p>\n');
     fprintf(fid,'						</div>\n');
+    fprintf(fid,'						<a href="https://www.oceanografia.es/IEOOS/Clim/images/%s"><img class="img-responsive"\n',fig4);
+    fprintf(fid,'								src="https://www.oceanografia.es/IEOOS/Clim/images/%s" alt="" /></a>\n',fig4);
     fprintf(fid,'					</div>\n');
     fprintf(fid,'				</div>\n');
     fprintf(fid,'<!----\n');
 
+    fprintf(fid,'<!-------->\n');
+    fprintf(fid,'				<div class="col-md-12 blog-bottom">\n');
+    fprintf(fid,'					<div class=" blog-top">\n');
+    fprintf(fid,'						<div class="blog-grid">\n');
+    fprintf(fid,'							<h3><center>%s</center></h3>\n',text5);
+    fprintf(fid,'							<p></p>\n');
+    fprintf(fid,'						</div>\n');
+    fprintf(fid,'						<a href="https://www.oceanografia.es/IEOOS/Clim/images/%s"><img class="img-responsive"\n',fig5);
+    fprintf(fid,'								src="https://www.oceanografia.es/IEOOS/Clim/images/%s" alt="" /></a>\n',fig5);
+    fprintf(fid,'					</div>\n');
+    fprintf(fid,'				</div>\n');
+    fprintf(fid,'<!----\n');
 
     fprintf(fid,'<!-------->\n');
     fprintf(fid,'<!--discalimer-->\n');
