@@ -1,114 +1,47 @@
-<!--A Design by W3layouts
-Author: W3layout
-Author URL: http://w3layouts.com
-License: Creative Commons Attribution 3.0 Unported
-License URL: http://creativecommons.org/licenses/by/3.0/
--->
-
+<!DOCTYPE html>
 <html>
-
 <head>
-	<title>IEOOS</title>
-	<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
-	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-	<script src="js/jquery.min.js"></script>
-	<!-- Custom Theme files -->
-	<!--theme-style-->
-	<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
-	<!--//theme-style-->
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="keywords" content="IEOOS" />
+  <title>Leaflet Permanent Text Box</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <style>
+    #map {
+      height: 400px;
+    }
+    .info {
+      padding: 6px 8px;
+      background: white;
+      background-color: rgba(255, 255, 255, 0.8);
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+      border-radius: 5px;
+      font-size: 14px;
+    }
+  </style>
 </head>
-
 <body>
+  <div id="map"></div>
 
-<!--SST-->
-	<div class="container">
-		<div class="blog">
-			<div class="top-blog">
-				<h2>Temperatura superficial del mar en la Demarcación SudAtlántica</h2>
-			</div>
-			<br>
-			<p>Los datos de ... </a></p>
-			<br>
-			<div class="top-blog"></div>
-			<a href="https://www.oceanografia.es/IEOOS/SST/images/map_sstd_anom_SUD.png"><img class="img-responsive" src="https://www.oceanografia.es/IEOOS/SST/images/map_sstd_anom_SUD.png"
-					alt="" /></a><br>
-					<p>...</p>
-			<br>
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script>
+    // Initialize the map
+    var map = L.map('map').setView([51.505, -0.09], 13);
 
-<!--Inicios items -->
-			<div class="blog-head">
-<!-------->
-				<div class="col-md-12 blog-bottom">
-					<div class=" blog-top">
-						<a href="https://www.oceanografia.es/IEOOS/SST/images/sstd_mean_SUD.png"><img class="img-responsive"
-								src="https://www.oceanografia.es/IEOOS/SST/images/sstd_mean_SUD.png" alt="" /></a>
-						<div class="blog-grid">
-							<h3>... </h3>
-							<p></p>
-						</div>
-					</div>
-				</div>
-<!----
+    // Add a tile layer to the map
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
 
-<!-------->
-				<div class="col-md-12 blog-bottom">
-					<div class=" blog-top">
-						<a href="https://www.oceanografia.es/IEOOS/SST/images/sstd_anom_mean_SUD.png"><img class="img-responsive"
-								src="https://www.oceanografia.es/IEOOS/SST/images/sstd_anom_mean_SUD.png" alt="" /></a>
-						<div class="blog-grid">
-							<h3>... </h3>
-							<p></p>
-						</div>
-					</div>
-				</div>
-<!----
+    // Custom control for the permanent text box
+    var info = L.control({position: 'topright'});
 
-<!-------->
-				<div class="col-md-12 blog-bottom">
-					<div class=" blog-top">
-						<a href="https://www.oceanografia.es/IEOOS/SST/images/sstd_SUD.png"><img class="img-responsive" src="https://www.oceanografia.es/IEOOS/SST/images/sstd_SUD.png"
-								alt="" /></a>
-						<div class="blog-grid">
-							<h3>... </h3>
-							<p></p>
-						</div>
-					</div>
-				</div>
-<!----
+    info.onAdd = function (map) {
+      this._div = L.DomUtil.create('div', 'info'); // Create a div with a class "info"
+      this._div.innerHTML = '<h4>Permanent Text Box</h4><p>This text box stays here!</p>';
+      return this._div;
+    };
 
-<!-------->
-				<div class="col-md-12 blog-bottom">
-					<div class=" blog-top">
-						<a href="https://www.oceanografia.es/IEOOS/SST/images/sstd_anom_SUD.png"><img class="img-responsive"
-								src="https://www.oceanografia.es/IEOOS/SST/images/sstd_anom_SUD.png" alt="" /></a>
-						<div class="blog-grid">
-							<h3>...</h3>
-							<p></p>
-						</div>
-					</div>
-				</div>
-<!----
-
-<!-------->
-<!--discalimer-->
-				<div class="services">
-					<div class="container">
-						<div class="top-services">
-							<p>Los datos proporcionados en estas páginas son sólamente a título informativo, por lo cual el Instituto Español de Oceanografia declinan toda responsabilidad por su uso.</p>
-						</div>
-					</div>
-				</div>
-<!----
-
-				<!--Fin items -->
-			</div>
-			<div class="clearfix"> </div>
-		</div>
-	</div>
-
+    info.addTo(map);
+  </script>
 </body>
-
 </html>
