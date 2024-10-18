@@ -8,7 +8,10 @@
 *.png
 prueba*
 Prueba*
+<<<<<<< HEAD
 images/*
+=======
+>>>>>>> d9438245508ece27625660b5dfd3d8ce81166679
 images/*.png
 Info/*
 Data/*.mat
