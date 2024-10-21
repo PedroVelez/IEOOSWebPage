@@ -158,7 +158,7 @@ for iD in range(0,5):
    mesTticks=[1,3,6,9,12]
    mesTticksT=['Enero','Marzo', 'Junio','Septiembre','']
 
-   fig, ax = plt.subplots(2, 2 , figsize=(20,9))
+   fig, ax = plt.subplots(2, 2 , figsize=(14,8))
    ax0 = fig.add_axes((0.04, 0.64, 0.44, 0.32))
    ax1 = fig.add_axes((0.04, 0.07, 0.44, 0.54))
    ax2 = fig.add_axes((0.50, 0.64, 0.44, 0.32))
@@ -245,24 +245,6 @@ for iD in range(0,5):
    DC_temp_anom_wmean = DC_temp_anom_weighted.mean(("longitude", "latitude"),skipna=True).load()
    DC_salt_anom_wmean = DC_salt_anom_weighted.mean(("longitude", "latitude"),skipna=True).load()
 
-
-   fig, ax = plt.subplots(2, 1 , sharex=True, figsize=(14,8))
-   ax[0].contourf(DC_temp_wmean.time, DC_temp_wmean.depth, 
-  DC_temp_wmean.transpose(), 32,cmap = plt.cm.RdBu.reversed())
-   #ax[0].set_title('Variacion temporal Temperatura promedio')
-   ax[0].set_ylabel('Presión') 
-   ax[0].invert_yaxis()
-   ax[0].set_ylim([200,0]);
-
-   ax[1].contourf(DC_temp_wmean.time, DC_temp_wmean.depth, 
-  DC_temp_wmean.transpose(), 32,cmap = plt.cm.RdBu.reversed())
-   ax[1].set_ylabel('Presión') 
-   ax[1].invert_yaxis()
-   ax[1].set_ylim([2000,200]);
-   fig.tight_layout()
-   plt.savefig(imageDir+'/'+titulo_short+'_SeccionTemporal_T.png')
-   plt.close(fig)
-
 # Smoothed versions
    print('         > interpolo cada m')
    depthi = np.arange(10,4000.5,10)
@@ -275,10 +257,12 @@ for iD in range(0,5):
    DCi_temp_anom_wmean_rolling = DCi_temp_anom_wmean.rolling(time=12,center=True).mean()
    DCi_salt_anom_wmean_rolling = DCi_salt_anom_wmean.rolling(time=12,center=True).mean()
 
-## Figura serie temporal promedio
-   Posiciones=[(0.10, 0.65, 0.8, 0.22), (0.10, 0.48, 0.8, 0.16),(0.10, 0.10, 0.8, 0.37)]
+## Figura serie temporal promedio por capas
+   Posiciones=[(0.10, 0.67, 0.8, 0.22), 
+               (0.10, 0.48, 0.8, 0.16),
+               (0.10, 0.10, 0.8, 0.37)]
    
-   fig, ax = plt.subplots(3,1,figsize = (14,15),sharex=True)
+   fig, ax = plt.subplots(3,1,figsize = (14,8),sharex=True)
 
    # Mean values
    ax[0].plot(DCi_temp_anom_wmean.time[-2],
@@ -385,15 +369,10 @@ for iD in range(0,5):
 
    # Create a Dataset from the DataArrays
    Glorys_means = xr.Dataset({
-   'DCi_temp_wmean': DC_temp_wmean,
-   'DCi_salt_wmean': DC_salt_wmean,
-   'DCi_temp_anom_wmean': DC_temp_wmean,
-   'DCi_salt_anom_wmean': DC_salt_wmean,
-   'DCi_temp_wmean_rolling': DC_temp_wmean,
-   'DCi_salt_wmean_rolling': DC_salt_wmean,
-   'DCi_temp_anom_wmean_rolling': DC_temp_wmean,
-   'DCi_salt_anom_wmean_rolling': DC_salt_wmean
-   })
+   'DCi_temp_wmean': DC_temp_wmean,'DCi_salt_wmean': DC_salt_wmean,
+   'DCi_temp_anom_wmean': DC_temp_wmean,'DCi_salt_anom_wmean': DC_salt_wmean,
+   'DCi_temp_wmean_rolling': DC_temp_wmean,'DCi_salt_wmean_rolling': DC_salt_wmean,
+   'DCi_temp_anom_wmean_rolling': DC_temp_wmean,'DCi_salt_anom_wmean_rolling': DC_salt_wmean})
    Glorys_means.to_netcdf('./Data/Glorys_means'+titulo_short+'.nc')
 
 
