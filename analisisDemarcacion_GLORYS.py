@@ -51,12 +51,26 @@ yearC2='2000'
 
 
 # Load the demarcacion data
-for iD in range(0,5):
+for iD in range(0,1):
+   
    titulo = Titulos[iD]
    titulo_short = Titulos_short[iD]
    print('>>>>> '+titulo)
-   
-   # Load the data from the .txt file
+
+   if  titulo_short == 'CAN':
+      rangoT= np.arange(3,25,0.25)
+      rangoTt=np.arange(3,25,2)
+      rangoTcb=np.arange(3,24,4)
+      rangoS= np.arange(35,37.5,0.05)
+      rangoSt=np.arange(35,37.5,0.25)
+      rangoScb=np.arange(35.,37.5,0.5)
+      rangop=[0,400,2000]
+      presionTickss=[0,200,400]
+      presionTicksi=[400,800,1200,1600,2000]
+      mesTticks=[1,3,6,9,12]
+      mesTticksT=['Enero','Marzo', 'Junio','Septiembre','']
+
+# Load the data from the .txt file
    demCoord = []
    longDem, latiDem = [], []
    with open('./LimiteDemarcaciones/Demarcacion'+titulo_short+'.txt', 'r') as f:
@@ -76,8 +90,62 @@ for iD in range(0,5):
 
    meanTemp=DC_temp.sel(depth=10, method='nearest').mean('time')
    meanTemp_unmasked=DC_temp_unmasked.sel(depth=10, method='nearest').mean('time')
-   print('         > mapa')
+
+# Calculo de perfiles promedios
+   print('         > calculando perfiles')
+   prof_mean_temp = DC_temp.stack(flat_dim=('longitude', 'latitude','time')).mean('flat_dim')
+   prof_std_temp  = DC_temp.stack(flat_dim=('longitude', 'latitude','time')).std('flat_dim')
+   prof_mean_salt = DC_salt.stack(flat_dim=('longitude', 'latitude','time')).mean('flat_dim')
+   prof_std_salt  = DC_salt.stack(flat_dim=('longitude', 'latitude','time')).std('flat_dim')
+
+# Create monthly climatology
+   print('         > calculando climatology')
+   DC_temp_clim = DC_temp.sel(time=slice(yearC1,yearC2)).groupby('time.month').mean(dim='time').load();
+   DC_salt_clim = DC_salt.sel(time=slice(yearC1,yearC2)).groupby('time.month').mean(dim='time').load();
+
+#Create anomaly
+   print('         > calculando anomaly')
+   DC_temp_anom = DC_temp.groupby('time.month') - DC_temp_clim
+   DC_temp_anom.load();
+   DC_salt_anom = DC_salt.groupby('time.month') - DC_salt_clim
+   DC_salt_anom.load();
+
+# Weighted horizontal mean
+   print('         > promedios por area ')
+   weights = np.cos(np.deg2rad(DC_temp.latitude))
+   weights = weights/weights.max()
+   weights.name = "weights"
+   DC_temp_weighted = DC_temp.weighted(weights)
+   DC_salt_weighted = DC_salt.weighted(weights)
+   DC_temp_anom_weighted = DC_temp_anom.weighted(weights)
+   DC_salt_anom_weighted = DC_salt_anom.weighted(weights)
+   DC_temp_wmean = DC_temp_weighted.mean(("longitude", "latitude"),skipna=True).load()
+   DC_salt_wmean = DC_salt_weighted.mean(("longitude", "latitude"),skipna=True).load()
+   DC_temp_anom_wmean = DC_temp_anom_weighted.mean(("longitude", "latitude"),skipna=True).load()
+   DC_salt_anom_wmean = DC_salt_anom_weighted.mean(("longitude", "latitude"),skipna=True).load()
+
+   print('         > interpolo cada m')
+   depthi = np.arange(10,4000.5,10)
+   DCi_temp_wmean = DC_temp_wmean.interp(depth=depthi)
+   DCi_salt_wmean = DC_temp_wmean.interp(depth=depthi)
+   DCi_temp_anom_wmean = DC_temp_anom_wmean.interp(depth=depthi)
+   DCi_salt_anom_wmean = DC_temp_anom_wmean.interp(depth=depthi)
+   DCi_temp_wmean_rolling = DCi_temp_wmean.rolling(time=12,center=True).mean()
+   DCi_salt_wmean_rolling = DCi_salt_wmean.rolling(time=12,center=True).mean()
+   DCi_temp_anom_wmean_rolling = DCi_temp_anom_wmean.rolling(time=12,center=True).mean()
+   DCi_salt_anom_wmean_rolling = DCi_salt_anom_wmean.rolling(time=12,center=True).mean()
+
+# Create a Dataset from the DataArrays
+   Glorys_means = xr.Dataset({
+   'DCi_temp_wmean': DC_temp_wmean,'DCi_salt_wmean': DC_salt_wmean,
+   'DCi_temp_anom_wmean': DC_temp_wmean,'DCi_salt_anom_wmean': DC_salt_wmean,
+   'DCi_temp_wmean_rolling': DC_temp_wmean,'DCi_salt_wmean_rolling': DC_salt_wmean,
+   'DCi_temp_anom_wmean_rolling': DC_temp_wmean,'DCi_salt_anom_wmean_rolling': DC_salt_wmean})
+   Glorys_means.to_netcdf('./Data/Glorys_means'+titulo_short+'.nc')
+
+
 #Mapa a 10 metros   
+   print('         > Figura mapa')
    fig = plt.figure(figsize=(8,8))
    ax = plt.axes(projection=ccrs.Robinson())
    cmc= ax.contour(meanTemp_unmasked.longitude,
@@ -96,16 +164,10 @@ for iD in range(0,5):
    ax.top_labels = ax.right_labels = False
    #ax.set_title('Temperatura promedio a '+'10 '+'para la '+titulo);
    plt.savefig(imageDir+'/'+titulo_short+'_temp_promedio'+'10'+'.png',bbox_inches='tight', pad_inches=0.1, dpi=300)
-
    plt.close(fig)
 
-# Calculo de perfiles promedios
-   print('         > calculando perfiles')
 
-   prof_mean_temp = DC_temp.stack(flat_dim=('longitude', 'latitude','time')).mean('flat_dim')
-   prof_std_temp  = DC_temp.stack(flat_dim=('longitude', 'latitude','time')).std('flat_dim')
-   prof_mean_salt = DC_salt.stack(flat_dim=('longitude', 'latitude','time')).mean('flat_dim')
-   prof_std_salt  = DC_salt.stack(flat_dim=('longitude', 'latitude','time')).std('flat_dim')
+# Figura ----------
 
 # Perfiles
    print('         > figura perfiles')
@@ -130,139 +192,100 @@ for iD in range(0,5):
    plt.savefig(imageDir+'/'+titulo_short+'_perfiles_T_S_promedio.png')
    plt.close(fig)
    
-## Seasonal cycle
-   print('         > calculando seasonal')
-	#Create monthly climatology
-   DC_temp_clim = DC_temp.sel(time=slice(yearC1,yearC2)).groupby('time.month').mean(dim='time').load();
-   DC_salt_clim = DC_salt.sel(time=slice(yearC1,yearC2)).groupby('time.month').mean(dim='time').load();
-
-#Create anomaly
-   DC_temp_anom = DC_temp.groupby('time.month') - DC_temp_clim
-   DC_temp_anom.load();
-   DC_salt_anom = DC_salt.groupby('time.month') - DC_salt_clim
-   DC_salt_anom.load();
 
 #Figuras ciclo estacional
-   rangoT= np.arange(4,25,0.25)
-   rangoTt=np.arange(4,25,2)
-   rangoTcb=np.arange(13,24,2)
-
-   rangoS= np.arange(35.,38,0.05)
-   rangoSt=np.arange(35.,38,0.25)
-
-   rangop=[0,450]
+   print('         > Figura seasonal cycle')
    colorMap=parula_map
-   presionTickss=[0,50,100,150]
-   presionTicksi=[400,800,1200,1600,2000]
 
-   mesTticks=[1,3,6,9,12]
-   mesTticksT=['Enero','Marzo', 'Junio','Septiembre','']
-
-   fig, ax = plt.subplots(2, 2 , figsize=(14,8))
-   ax0 = fig.add_axes((0.04, 0.64, 0.44, 0.32))
-   ax1 = fig.add_axes((0.04, 0.07, 0.44, 0.54))
-   ax2 = fig.add_axes((0.50, 0.64, 0.44, 0.32))
-   ax3 = fig.add_axes((0.50, 0.07, 0.44, 0.54))
+   fig = plt.figure(figsize=(14,8))
+   ax0 = fig.add_axes((0.04, 0.64, 0.42, 0.32))
+   ax1 = fig.add_axes((0.04, 0.07, 0.42, 0.54))
+   ax2 = fig.add_axes((0.50, 0.64, 0.42, 0.32))
+   ax3 = fig.add_axes((0.50, 0.07, 0.42, 0.54))
    cbarTem = fig.add_axes([0.08, 0.02, 0.36, 0.015])
    cbarSal = fig.add_axes([0.54, 0.02, 0.36, 0.015])
 
+   print('           > minT:'+str(DC_temp_clim.mean(dim='longitude').mean(dim='latitude').sel(depth=slice(0,2600)).min().values))
+   print('           > maxT:'+str(DC_temp_clim.mean(dim='longitude').mean(dim='latitude').sel(depth=slice(0,2600)).max().values))
+
+   print('           > minS:'+str(DC_salt_clim.mean(dim='longitude').mean(dim='latitude').sel(depth=slice(0,2600)).min().values))
+   print('           > maxS:'+str(DC_salt_clim.mean(dim='longitude').mean(dim='latitude').sel(depth=slice(0,2600)).max().values))
+
    ax0.contourf(DC_temp_clim.mean(dim='longitude').mean(dim='latitude').month,
-            DC_temp_clim.mean(dim='longitude').mean(dim='latitude').sel(depth=slice(0,400)).depth,
-            DC_temp_clim.mean(dim='longitude').mean(dim='latitude').sel(depth=slice(0,400)).transpose(),rangoT,extend='both',
+            DC_temp_clim.mean(dim='longitude').mean(dim='latitude').sel(depth=slice(0,rangop[1]+100)).depth,
+            DC_temp_clim.mean(dim='longitude').mean(dim='latitude').sel(depth=slice(0,rangop[1]+100)).transpose(),rangoT,extend='both',
             cmap = colorMap)
    cm = ax0.contour(DC_temp_clim.mean(dim='longitude').mean(dim='latitude').month,
-              DC_temp_clim.mean(dim='longitude').mean(dim='latitude').sel(depth=slice(0,400)).depth,
-              DC_temp_clim.mean(dim='longitude').mean(dim='latitude').sel(depth=slice(0,400)).transpose(),levels=rangoTt,colors='k')
+              DC_temp_clim.mean(dim='longitude').mean(dim='latitude').sel(depth=slice(0,rangop[1]+100)).depth,
+              DC_temp_clim.mean(dim='longitude').mean(dim='latitude').sel(depth=slice(0,rangop[1]+100)).transpose(),levels=rangoTt,colors='k')
    ax0.invert_yaxis()
    ax0.clabel(cm, fmt='%2.0f', colors='w', fontsize=10)
-   ax0.set_ylim([200,0]);
+   ax0.set_ylim([rangop[1],0]);
    ax0.set_ylabel('Presión') 
    ax0.set_xticks(mesTticks,['','', '','','']) 
    ax0.set_yticks(presionTickss)
    ax0.set_title('Temperatura')
 
    cmTem = ax1.contourf(DC_temp_clim.mean(dim='longitude').mean(dim='latitude').month,
-            DC_temp_clim.mean(dim='longitude').mean(dim='latitude').sel(depth=slice(200,2600)).depth,
-            DC_temp_clim.mean(dim='longitude').mean(dim='latitude').sel(depth=slice(200,2600)).transpose(),rangoT,extend='both',
+            DC_temp_clim.mean(dim='longitude').mean(dim='latitude').sel(depth=slice(rangop[1]-100,2600)).depth,
+            DC_temp_clim.mean(dim='longitude').mean(dim='latitude').sel(depth=slice(rangop[1]-100,2600)).transpose(),rangoT,extend='both',
             cmap = colorMap)
 
    cm = ax1.contour(DC_temp_clim.mean(dim='longitude').mean(dim='latitude').month,
-              DC_temp_clim.mean(dim='longitude').mean(dim='latitude').sel(depth=slice(200,2600)).depth,
-              DC_temp_clim.mean(dim='longitude').mean(dim='latitude').sel(depth=slice(200,2600)).transpose(),levels=rangoTt,colors='k')
+              DC_temp_clim.mean(dim='longitude').mean(dim='latitude').sel(depth=slice(rangop[1]-100,2600)).depth,
+              DC_temp_clim.mean(dim='longitude').mean(dim='latitude').sel(depth=slice(rangop[1]-100,2600)).transpose(),levels=rangoTt,colors='k')
 
    ax1.clabel(cm, fmt='%2.2f', colors='w', fontsize=10)
    ax1.invert_yaxis()
-   ax1.set_ylim([2000,400]);
-   ax1.set_xticks([1,3,6,9,12], ['Enero','Marzo', 'Junio','Septiembre','']) 
+   ax1.set_ylim([rangop[2],rangop[1]]);
+   ax1.set_xticks([1,3,6,9,12],mesTticksT) 
    ax1.set_yticks(presionTicksi)
-   fig.colorbar(cmTem, cax=cbarTem,ticks=rangoTt,orientation='horizontal')
+   fig.colorbar(cmTem, cax=cbarTem,ticks=rangoTcb,orientation='horizontal')
 
   ## Salinidad
    ax2.contourf(DC_salt_clim.mean(dim='longitude').mean(dim='latitude').month,
-            DC_salt_clim.mean(dim='longitude').mean(dim='latitude').sel(depth=slice(0,400)).depth,
-            DC_salt_clim.mean(dim='longitude').mean(dim='latitude').sel(depth=slice(0,400)).transpose(),rangoS,extend='both',
+            DC_salt_clim.mean(dim='longitude').mean(dim='latitude').sel(depth=slice(0,rangop[1]+100)).depth,
+            DC_salt_clim.mean(dim='longitude').mean(dim='latitude').sel(depth=slice(0,rangop[1]+100)).transpose(),rangoS,extend='both',
             cmap = colorMap)
    cm=ax2.contour(DC_salt_clim.mean(dim='longitude').mean(dim='latitude').month,
-              DC_salt_clim.mean(dim='longitude').mean(dim='latitude').sel(depth=slice(0,400)).depth,
-              DC_salt_clim.mean(dim='longitude').mean(dim='latitude').sel(depth=slice(0,400)).transpose(),levels=rangoSt,colors='k')
+              DC_salt_clim.mean(dim='longitude').mean(dim='latitude').sel(depth=slice(0,rangop[1]+100)).depth,
+              DC_salt_clim.mean(dim='longitude').mean(dim='latitude').sel(depth=slice(0,rangop[1]+100)).transpose(),levels=rangoSt,colors='k')
    ax2.invert_yaxis()
    ax2.clabel(cm, fmt='%2.0f', colors='w', fontsize=10)
-   ax2.set_ylim([200,0]);
+   ax2.set_ylim([rangop[1],0]);
    ax2.set_title('Salinidad')
    ax2.set_xticks(mesTticks,['','', '','','']) 
    ax2.set_yticks(presionTickss)
 
    cmSal = ax3.contourf(DC_salt_clim.mean(dim='longitude').mean(dim='latitude').month,
-            DC_salt_clim.mean(dim='longitude').mean(dim='latitude').sel(depth=slice(200,2600)).depth,
-            DC_salt_clim.mean(dim='longitude').mean(dim='latitude').sel(depth=slice(200,2600)).transpose(),rangoS,extend='both',
+            DC_salt_clim.mean(dim='longitude').mean(dim='latitude').sel(depth=slice(rangop[1]-100,2600)).depth,
+            DC_salt_clim.mean(dim='longitude').mean(dim='latitude').sel(depth=slice(rangop[1]-100,2600)).transpose(),rangoS,extend='both',
             cmap = colorMap)
 
    cm = ax3.contour(DC_salt_clim.mean(dim='longitude').mean(dim='latitude').month,
-              DC_salt_clim.mean(dim='longitude').mean(dim='latitude').sel(depth=slice(200,2600)).depth,
-              DC_salt_clim.mean(dim='longitude').mean(dim='latitude').sel(depth=slice(200,2600)).transpose(),levels=rangoSt,colors='k')
+              DC_salt_clim.mean(dim='longitude').mean(dim='latitude').sel(depth=slice(rangop[1]-100,2600)).depth,
+              DC_salt_clim.mean(dim='longitude').mean(dim='latitude').sel(depth=slice(rangop[1]-100,2600)).transpose(),levels=rangoSt,colors='k')
 
    ax3.clabel(cm, fmt='%2.2f', colors='w', fontsize=10)
    ax3.invert_yaxis()
-   ax3.set_ylim([2000,400]);
-   ax3.set_xticks([1,3,6,9,12], ['Enero','Marzo', 'Junio','Septiembr','']) 
+   ax3.set_ylim([rangop[2]+100,rangop[1]]);
+   ax3.set_xticks([1,3,6,9,12], mesTticksT) 
    ax3.set_yticks(presionTicksi)
-
-   fig.colorbar(cmSal, cax=cbarSal,ticks=rangoSt,orientation='horizontal')
+   fig.colorbar(cmSal, cax=cbarSal,ticks=rangoScb,orientation='horizontal')
+   
    plt.savefig(imageDir+'/'+titulo_short+'_climatologia.png',bbox_inches='tight', pad_inches=0.1, dpi=300)
-
-# Weighted horizontal mean
-   print('         > promedios por area ')
-
-   weights = np.cos(np.deg2rad(DC_temp.latitude))
-   weights = weights/weights.max()
-   weights.name = "weights"
-   DC_temp_weighted = DC_temp.weighted(weights)
-   DC_salt_weighted = DC_salt.weighted(weights)
-   DC_temp_anom_weighted = DC_temp_anom.weighted(weights)
-   DC_salt_anom_weighted = DC_salt_anom.weighted(weights)
-   DC_temp_wmean = DC_temp_weighted.mean(("longitude", "latitude"),skipna=True).load()
-   DC_salt_wmean = DC_salt_weighted.mean(("longitude", "latitude"),skipna=True).load()
-   DC_temp_anom_wmean = DC_temp_anom_weighted.mean(("longitude", "latitude"),skipna=True).load()
-   DC_salt_anom_wmean = DC_salt_anom_weighted.mean(("longitude", "latitude"),skipna=True).load()
-
-# Smoothed versions
-   print('         > interpolo cada m')
-   depthi = np.arange(10,4000.5,10)
-   DCi_temp_wmean = DC_temp_wmean.interp(depth=depthi)
-   DCi_salt_wmean = DC_temp_wmean.interp(depth=depthi)
-   DCi_temp_anom_wmean = DC_temp_anom_wmean.interp(depth=depthi)
-   DCi_salt_anom_wmean = DC_temp_anom_wmean.interp(depth=depthi)
-   DCi_temp_wmean_rolling = DCi_temp_wmean.rolling(time=12,center=True).mean()
-   DCi_salt_wmean_rolling = DCi_salt_wmean.rolling(time=12,center=True).mean()
-   DCi_temp_anom_wmean_rolling = DCi_temp_anom_wmean.rolling(time=12,center=True).mean()
-   DCi_salt_anom_wmean_rolling = DCi_salt_anom_wmean.rolling(time=12,center=True).mean()
+   plt.close(fig)
 
 ## Figura serie temporal promedio por capas
+   print('         > Figura layers')
    Posiciones=[(0.10, 0.67, 0.8, 0.22), 
-               (0.10, 0.48, 0.8, 0.16),
+               (0.10, 0.49, 0.8, 0.15),
                (0.10, 0.10, 0.8, 0.37)]
-   
-   fig, ax = plt.subplots(3,1,figsize = (14,8),sharex=True)
+   PosicionCB = [0.92, 0.10, 0.02, 0.52]
+
+   rangoTa=np.arange(-1.,1.,0.05)
+
+   fig, ax = plt.subplots(3,1,figsize = (14,12),sharex=True)
 
    # Mean values
    ax[0].plot(DCi_temp_anom_wmean.time[-2],
@@ -301,53 +324,65 @@ for iD in range(0,5):
    ax[0].legend()
    ax[0].set_ylabel('[ºC]')
    ax[0].set_frame_on(False)
-   ax[0].set_title('Anomalia (respecto '+yearC1+'-'+yearC2+') de temperatura promedio [ºC] en la '+titulo);
 
+   #tTActual = sst.time[-1].dt.strftime("%d %B %Y").values + " %2.2f $^\circ$C "%(sst[-1].values)
+   #tTMaxima =  'Temperatura máxima: ' + "%2.2f ºC"%(tmax) + ' el ' + d_tmax.dt.strftime("%d %B %Y").values
+   #tTMinima =  'Temperatura mínima: ' + "%2.2f ºC"%(tmin) + ' el ' + d_tmin.dt.strftime("%d %B %Y").values
+   tPeriodo =  " [" + DCi_temp_anom_wmean.time[0].dt.strftime("%d %B %Y").values + " - "+ DCi_temp_anom_wmean.time[-1].dt.strftime("%d %B %Y").values + "]"
+
+   #ax.set_title(TituloFigura + tPeriodo + '\n' + tTMaxima + ' - ' + tTMinima + tTendencia);
+   
+   ax[0].set_title('Anomalia (respecto '+yearC1+'-'+yearC2+') de temperatura promedio [ºC] en la '+titulo+tPeriodo);
+
+   print('           > minaT:'+str(DCi_temp_anom_wmean.sel(depth=slice(10,2600)).min().values))
+   print('           > maxaT:'+str(DCi_temp_anom_wmean.sel(depth=slice(10,2600)).max().values))
+   
+   
    # UpperOcean
    ax[1].contour(DCi_temp_anom_wmean.time,
-                 DCi_temp_anom_wmean.sel(depth=slice(10,800)).depth, 
-                 DCi_temp_anom_wmean.sel(depth=slice(10,800)).transpose()
+                 DCi_temp_anom_wmean.sel(depth=slice(10,400)).depth, 
+                 DCi_temp_anom_wmean.sel(depth=slice(10,400)).transpose()
                  ,colors='w',levels=[-0.15, -0.05, 0.05, 0.15] )
    ax[1].contour(DCi_temp_anom_wmean.time, 
-                 DCi_temp_anom_wmean.sel(depth=slice(10,800)).depth, 
-                 DCi_temp_anom_wmean.sel(depth=slice(10,800)).transpose(),
-                 colors='w', linewidths=2,levels=[0] )
+                 DCi_temp_anom_wmean.sel(depth=slice(10,400)).depth, 
+                 DCi_temp_anom_wmean.sel(depth=slice(10,400)).transpose(),
+                 colors='w', linewidths=1,levels=[0] )
 
    ax[1].contourf(DCi_temp_anom_wmean.time, 
-                 DCi_temp_anom_wmean.sel(depth=slice(10,800)).depth, 
-                 DCi_temp_anom_wmean.sel(depth=slice(10,800)).transpose(),
-                  40, cmap='RdBu_r')
+                 DCi_temp_anom_wmean.sel(depth=slice(10,400)).depth, 
+                 DCi_temp_anom_wmean.sel(depth=slice(10,400)).transpose(),
+                  levels=rangoTa, cmap='RdBu_r')
     
-   ax[1].set_ylim(0,800)
+   ax[1].set_ylim(0,400)
    ax[1].invert_yaxis()
-   ax[1].set_yticks([200,400,600,800])
+   ax[1].set_yticks([0,100,200,300,400])
    ax[1].grid(linestyle='-', linewidth=.9)
    ax[1].set_position(Posiciones[1])
 
    ax[2].contour(DCi_temp_anom_wmean.time, 
-                 DCi_temp_anom_wmean.sel(depth=slice(800,2600)).depth, 
-                 DCi_temp_anom_wmean.sel(depth=slice(800,2600)).transpose(),
+                 DCi_temp_anom_wmean.sel(depth=slice(400,2600)).depth, 
+                 DCi_temp_anom_wmean.sel(depth=slice(400,2600)).transpose(),
                  colors='w',levels=[-0.05,0.05] )
    
    ax[2].contour(DCi_temp_anom_wmean.time, 
-                 DCi_temp_anom_wmean.sel(depth=slice(800,2600)).depth, 
-                 DCi_temp_anom_wmean.sel(depth=slice(800,2600)).transpose(),
-                 colors='w', linewidths=3,levels=[0] )
+                 DCi_temp_anom_wmean.sel(depth=slice(400,2600)).depth, 
+                 DCi_temp_anom_wmean.sel(depth=slice(400,2600)).transpose(),
+                 colors='w', linewidths=1,levels=[0] )
    
    cntr2 = ax[2].contourf(DCi_temp_anom_wmean.time,
-                          DCi_temp_anom_wmean.sel(depth=slice(800,2600)).depth, 
-                          DCi_temp_anom_wmean.sel(depth=slice(800,2600)).transpose(),
-                          40,cmap='RdBu_r')
+                          DCi_temp_anom_wmean.sel(depth=slice(400,2600)).depth, 
+                          DCi_temp_anom_wmean.sel(depth=slice(400,2600)).transpose(),
+                          levels=rangoTa,cmap='RdBu_r')
   
-   ax[2].set_ylim(800,2400)
+   ax[2].set_ylim(400,2400)
    ax[2].invert_yaxis()
-   ax[2].set_yticks([1000,1200,1400,1600,1800,2000,2200,2400])
+   ax[2].set_yticks([400,800,1200,1600,2000,2400])
    ax[2].grid(linestyle='-', linewidth=.9)
    ax[2].set_position(Posiciones[2])
    ax[2].set_ylabel('Presión')
 
    # Adding the colorbar
-   cbaxes = fig.add_axes([0.92, 0.10, 0.02, 0.44])  
+   cbaxes = fig.add_axes( PosicionCB)  
    cb = fig.colorbar(cntr2, cax=cbaxes);
    cbaxes.set_ylabel('Temperatura')
 
@@ -367,47 +402,41 @@ for iD in range(0,5):
    plt.savefig(imageDir+'/'+titulo_short+'_temp_promedio_capas_contorno.png',bbox_inches='tight', pad_inches=0.1, dpi=300)
    plt.close(fig)
 
-   # Create a Dataset from the DataArrays
-   Glorys_means = xr.Dataset({
-   'DCi_temp_wmean': DC_temp_wmean,'DCi_salt_wmean': DC_salt_wmean,
-   'DCi_temp_anom_wmean': DC_temp_wmean,'DCi_salt_anom_wmean': DC_salt_wmean,
-   'DCi_temp_wmean_rolling': DC_temp_wmean,'DCi_salt_wmean_rolling': DC_salt_wmean,
-   'DCi_temp_anom_wmean_rolling': DC_temp_wmean,'DCi_salt_anom_wmean_rolling': DC_salt_wmean})
-   Glorys_means.to_netcdf('./Data/Glorys_means'+titulo_short+'.nc')
-
-
 # 
-   fig, ax = plt.subplots(2,1, figsize=(14,12))
+   print('         > Figura compare layers')
+   fig, ax = plt.subplots(2,1, figsize=(14,14))
    # Mean values
    media=DCi_temp_wmean.sel(depth=slice(200,2600)).mean("depth").mean('time')
    ax[0].plot(DCi_temp_wmean.time[-2],
- DCi_temp_wmean.sel(depth=slice(200,2600)).mean("depth")[-2]-media,'ko')
+              DCi_temp_wmean.sel(depth=slice(200,2600)).mean("depth")[-2]-media,'ko')
    ax[0].plot(DCi_temp_wmean.time,
- DCi_temp_wmean.sel(depth=slice(200,2600)).mean("depth")-media,color='k',alpha=0.3)
+              DCi_temp_wmean.sel(depth=slice(200,2600)).mean("depth")-media,
+              color='k',alpha=0.3)
    ax[0].plot(DCi_temp_wmean_rolling.time,
- DCi_temp_wmean_rolling.sel(depth=slice(200,2600)).mean("depth")-media,linewidth=2,color='k',
- label= '  200 - 2600 dbar')
+              DCi_temp_wmean_rolling.sel(depth=slice(200,2600)).mean("depth")-media,
+              linewidth=2,color='k',label= '  200 - 2600 dbar')
 
    media=DCi_temp_wmean.sel(depth=slice(200,800)).mean("depth").mean('time')
    ax[0].plot(DCi_temp_wmean.time,
- DCi_temp_wmean.sel(depth=slice(200,800)).mean("depth")-media,color='r',alpha=0.3)
+              DCi_temp_wmean.sel(depth=slice(200,800)).mean("depth")-media,
+              color='r',alpha=0.3)
    ax[0].plot(DCi_temp_wmean_rolling.time,
- DCi_temp_wmean_rolling.sel(depth=slice(200,800)).mean("depth")-media,linewidth=2,color='r' ,
- label= '  200 -  800 dbar')
+              DCi_temp_wmean_rolling.sel(depth=slice(200,800)).mean("depth")-media,
+              linewidth=2,color='r' ,label= '  200 -  800 dbar')
 
    media=DCi_temp_wmean.sel(depth=slice(800,1400)).mean("depth").mean('time')
    ax[0].plot(DCi_temp_wmean.time,
- DCi_temp_wmean.sel(depth=slice(800,1400)).mean("depth")-media,color='b',alpha=0.3)
+              DCi_temp_wmean.sel(depth=slice(800,1400)).mean("depth")-media,color='b',alpha=0.3)
    ax[0].plot(DCi_temp_wmean_rolling.time,
- DCi_temp_wmean_rolling.sel(depth=slice(800,1400)).mean("depth")-media,linewidth=2,color='blue',
- label= '  800 - 1400 dbar')
+              DCi_temp_wmean_rolling.sel(depth=slice(800,1400)).mean("depth")-media,
+              linewidth=2,color='blue',label= '  800 - 1400 dbar')
 
    media=DCi_temp_wmean.sel(depth=slice(1400,2600)).mean("depth").mean('time')
    ax[0].plot(DCi_temp_wmean.time,
- DCi_temp_wmean.sel(depth=slice(1400,2600)).mean("depth")-media,color='g',alpha=0.3)
+              DCi_temp_wmean.sel(depth=slice(1400,2600)).mean("depth")-media,color='g',alpha=0.3)
    ax[0].plot(DCi_temp_wmean_rolling.time,
- DCi_temp_wmean_rolling.sel(depth=slice(1400,2600)).mean("depth")-media,linewidth=2,color='g',
- label= ' 1400 - 2600 dbar')
+              DCi_temp_wmean_rolling.sel(depth=slice(1400,2600)).mean("depth")-media,
+              linewidth=2,color='g',label= ' 1400 - 2600 dbar')
 
    ax[0].grid(linestyle='-', linewidth=.9)
    ax[0].legend()
@@ -416,34 +445,36 @@ for iD in range(0,5):
 
    # Anomalias
    ax[1].plot(DCi_temp_anom_wmean.time[-2],
- DCi_temp_anom_wmean.sel(depth=slice(20,2600)).mean("depth")[-2],'ko')
+              DCi_temp_anom_wmean.sel(depth=slice(20,2600)).mean("depth")[-2],'ko')
 
    ax[1].plot(DCi_temp_anom_wmean.time,
- DCi_temp_anom_wmean.sel(depth=slice(20,2600)).mean("depth"),color='k',alpha=0.3)
+              DCi_temp_anom_wmean.sel(depth=slice(20,2600)).mean("depth"),
+              color='k',alpha=0.3)
    ax[1].plot(DCi_temp_anom_wmean_rolling.time,
- DCi_temp_anom_wmean_rolling.sel(depth=slice(20,2600)).mean("depth"),linewidth=2,color='k',
- label= '   20 - 2600 dbar')
+              DCi_temp_anom_wmean_rolling.sel(depth=slice(20,2600)).mean("depth"),
+              linewidth=2,color='k',label= '   20 - 2600 dbar')
 
    ax[1].plot(DCi_temp_anom_wmean.time,
- DCi_temp_anom_wmean.sel(depth=slice(200,800)).mean("depth"),color='r',alpha=0.3)
+              DCi_temp_anom_wmean.sel(depth=slice(200,800)).mean("depth"),color='r',alpha=0.3)
    ax[1].plot(DCi_temp_anom_wmean_rolling.time,
- DCi_temp_anom_wmean_rolling.sel(depth=slice(200,800)).mean("depth"),linewidth=2,color='r' ,
- label= '  200 -  800 dbar')
+              DCi_temp_anom_wmean_rolling.sel(depth=slice(200,800)).mean("depth"),
+              linewidth=2,color='r' ,label= '  200 -  800 dbar')
 
    ax[1].plot(DCi_temp_anom_wmean.time,
- DCi_temp_anom_wmean.sel(depth=slice(800,1400)).mean("depth"),color='b',alpha=0.3)
+              DCi_temp_anom_wmean.sel(depth=slice(800,1400)).mean("depth"),color='b',alpha=0.3)
    ax[1].plot(DCi_temp_anom_wmean_rolling.time,
- DCi_temp_anom_wmean_rolling.sel(depth=slice(800,1400)).mean("depth"),linewidth=2,color='blue',
- label= '  800 - 1400 dbar')
+              DCi_temp_anom_wmean_rolling.sel(depth=slice(800,1400)).mean("depth"),
+              linewidth=2,color='blue',label= '  800 - 1400 dbar')
 
    ax[1].plot(DCi_temp_anom_wmean.time,
- DCi_temp_anom_wmean.sel(depth=slice(1400,2600)).mean("depth"),color='g',alpha=0.3)
+              DCi_temp_anom_wmean.sel(depth=slice(1400,2600)).mean("depth"),color='g',alpha=0.3)
    ax[1].plot(DCi_temp_anom_wmean_rolling.time,
- DCi_temp_anom_wmean_rolling.sel(depth=slice(1400,2600)).mean("depth"),linewidth=2,color='g',
- label= ' 1400 - 2600 dbar')
+              DCi_temp_anom_wmean_rolling.sel(depth=slice(1400,2600)).mean("depth"),
+              linewidth=2,color='g',label= ' 1400 - 2600 dbar')
 
    ax[1].grid(linestyle='-', linewidth=.9)
    ax[1].legend()
    ax[1].set_ylabel('[ºC]')
    ax[1].set_title('Anomalia (respecto '+yearC1+'-'+yearC2+') de temperatura promedio [ºC] en la '+titulo);
-   plt.savefig(imageDir+'/'+titulo_short+'_temp_promedio_capas.png')
+   plt.savefig(imageDir+'/'+titulo_short+'_temp_promedio_capas',bbox_inches='tight', pad_inches=0.1, dpi=300)
+   plt.close(fig)

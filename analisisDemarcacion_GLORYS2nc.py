@@ -58,6 +58,9 @@ for iy in range(2021,2022):
 for iy in range(2022,2024):
     for im in range(1,13):
         files.append(base_file2+"mercatorglorys12v1_gl12_mean_%04d%02d.nc"%(iy,im))    
+for iy in range(2024,2025):
+    for im in range(1,7):
+        files.append(base_file2+"mercatorglorys12v1_gl12_mean_%04d%02d.nc"%(iy,im))        
 
     print('>>>>> Reading files:'str(len(files)))
 
