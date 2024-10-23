@@ -62,7 +62,7 @@ for iy in range(2024,2025):
     for im in range(1,7):
         files.append(base_file2+"mercatorglorys12v1_gl12_mean_%04d%02d.nc"%(iy,im))        
 
-    print('>>>>> Reading files:'str(len(files)))
+    print('>>>>> Reading files:'+str(len(files)))
 
     DC = xr.open_mfdataset(files)
     DC = DC.drop_vars("mlotst").drop_vars("zos")

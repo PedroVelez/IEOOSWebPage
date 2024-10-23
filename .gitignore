@@ -6,6 +6,7 @@
 *.log
 *.nc
 *.png
+nohup.out
 prueba*
 Prueba*
 images/
