@@ -69,6 +69,18 @@ for iD in range(0,1):
       presionTicksi=[400,800,1200,1600,2000]
       mesTticks=[1,3,6,9,12]
       mesTticksT=['Enero','Marzo', 'Junio','Septiembre','']
+   elif  titulo_short == 'NOR':
+      rangoT= np.arange(3,21,0.25)
+      rangoTt=np.arange(3,21,2)
+      rangoTcb=np.arange(3,21,4)
+      rangoS= np.arange(35,36.5,0.05)
+      rangoSt=np.arange(35,36.5,0.1)
+      rangoScb=np.arange(35.,36.5,0.5)
+      rangop=[0,400,2000]
+      presionTickss=[0,200,400]
+      presionTicksi=[400,800,1200,1600,2000]
+      mesTticks=[1,3,6,9,12]
+      mesTticksT=['Enero','Marzo', 'Junio','Septiembre','']   
 
 # Load the data from the .txt file
    demCoord = []
@@ -137,10 +149,15 @@ for iD in range(0,1):
 
 # Create a Dataset from the DataArrays
    Glorys_means = xr.Dataset({
-   'DCi_temp_wmean': DC_temp_wmean,'DCi_salt_wmean': DC_salt_wmean,
-   'DCi_temp_anom_wmean': DC_temp_wmean,'DCi_salt_anom_wmean': DC_salt_wmean,
-   'DCi_temp_wmean_rolling': DC_temp_wmean,'DCi_salt_wmean_rolling': DC_salt_wmean,
-   'DCi_temp_anom_wmean_rolling': DC_temp_wmean,'DCi_salt_anom_wmean_rolling': DC_salt_wmean})
+   'DCi_temp_wmean': DCi_temp_wmean,
+   'DCi_temp_anom_wmean': DCi_temp_anom_wmean,
+   'DCi_temp_wmean_rolling': DCi_temp_wmean_rolling,
+   'DCi_temp_anom_wmean_rolling':DCi_temp_anom_wmean_rolling,
+   'DCi_salt_wmean': DCi_salt_wmean,
+   'DCi_salt_anom_wmean': DCi_salt_anom_wmean,
+   'DCi_salt_wmean_rolling': DCi_salt_wmean_rolling,
+   'DCi_salt_anom_wmean_rolling':DCi_salt_anom_wmean_rolling})
+   
    Glorys_means.to_netcdf('./Data/Glorys_means'+titulo_short+'.nc')
 
 
@@ -280,10 +297,10 @@ for iD in range(0,1):
    print('         > Figura layers')
    Posiciones=[(0.10, 0.67, 0.8, 0.22), 
                (0.10, 0.49, 0.8, 0.15),
-               (0.10, 0.10, 0.8, 0.37)]
-   PosicionCB = [0.92, 0.10, 0.02, 0.52]
+               (0.10, 0.10, 0.8, 0.38)]
+   PosicionCB = [0.92, 0.10, 0.02, 0.53]
 
-   rangoTa=np.arange(-1.,1.,0.05)
+   rangoTa=np.arange(-.8,.8,0.05)
 
    fig, ax = plt.subplots(3,1,figsize = (14,12),sharex=True)
 
@@ -313,7 +330,8 @@ for iD in range(0,1):
               DCi_temp_anom_wmean_rolling.sel(depth=slice(800,1400)).mean("depth"),
               linewidth=2,color='blue',label= '  800 - 1400 dbar')
 
-   ax[0].plot(DCi_temp_anom_wmean.time, DCi_temp_anom_wmean.sel(depth=slice(1400,2600)).mean("depth"),
+   ax[0].plot(DCi_temp_anom_wmean.time, 
+              DCi_temp_anom_wmean.sel(depth=slice(1400,2600)).mean("depth"),
               color='g',alpha=0.3)
    
    ax[0].plot(DCi_temp_anom_wmean_rolling.time, DCi_temp_anom_wmean_rolling.sel(depth=slice(1400,2600)).mean("depth"),
@@ -332,7 +350,7 @@ for iD in range(0,1):
 
    #ax.set_title(TituloFigura + tPeriodo + '\n' + tTMaxima + ' - ' + tTMinima + tTendencia);
    
-   ax[0].set_title('Anomalia (respecto '+yearC1+'-'+yearC2+') de temperatura promedio [ºC] en la '+titulo+tPeriodo);
+   ax[0].set_title('Anomalia (respecto '+yearC1+'-'+yearC2+') de temperatura promedio [ºC] en la '+titulo+ '\n'+tPeriodo);
 
    print('           > minaT:'+str(DCi_temp_anom_wmean.sel(depth=slice(10,2600)).min().values))
    print('           > maxaT:'+str(DCi_temp_anom_wmean.sel(depth=slice(10,2600)).max().values))
@@ -346,12 +364,12 @@ for iD in range(0,1):
    ax[1].contour(DCi_temp_anom_wmean.time, 
                  DCi_temp_anom_wmean.sel(depth=slice(10,400)).depth, 
                  DCi_temp_anom_wmean.sel(depth=slice(10,400)).transpose(),
-                 colors='w', linewidths=1,levels=[0] )
+                 colors='k', linewidths=1,levels=[0] )
 
    ax[1].contourf(DCi_temp_anom_wmean.time, 
                  DCi_temp_anom_wmean.sel(depth=slice(10,400)).depth, 
                  DCi_temp_anom_wmean.sel(depth=slice(10,400)).transpose(),
-                  levels=rangoTa, cmap='RdBu_r')
+                  levels=rangoTa, cmap='RdBu_r',extend='both')
     
    ax[1].set_ylim(0,400)
    ax[1].invert_yaxis()
@@ -367,12 +385,12 @@ for iD in range(0,1):
    ax[2].contour(DCi_temp_anom_wmean.time, 
                  DCi_temp_anom_wmean.sel(depth=slice(400,2600)).depth, 
                  DCi_temp_anom_wmean.sel(depth=slice(400,2600)).transpose(),
-                 colors='w', linewidths=1,levels=[0] )
+                 colors='w', linewidths=2,levels=[0] )
    
    cntr2 = ax[2].contourf(DCi_temp_anom_wmean.time,
                           DCi_temp_anom_wmean.sel(depth=slice(400,2600)).depth, 
                           DCi_temp_anom_wmean.sel(depth=slice(400,2600)).transpose(),
-                          levels=rangoTa,cmap='RdBu_r')
+                          levels=rangoTa,cmap='RdBu_r',extend='both')
   
    ax[2].set_ylim(400,2400)
    ax[2].invert_yaxis()
@@ -382,9 +400,9 @@ for iD in range(0,1):
    ax[2].set_ylabel('Presión')
 
    # Adding the colorbar
-   cbaxes = fig.add_axes( PosicionCB)  
+   cbaxes = fig.add_axes(PosicionCB)  
    cb = fig.colorbar(cntr2, cax=cbaxes);
-   cbaxes.set_ylabel('Temperatura')
+   cbaxes.set_ylabel('Anomalia temperatura [ºC]')
 
    # xtick Labels
    ax[0].set_xticks(pd.date_range(start="1995-01-01", end="2025-01-01",freq='2YS-JAN'));
@@ -392,13 +410,6 @@ for iD in range(0,1):
    ax[2].set_xticks(pd.date_range(start="1995-01-01", end="2025-01-01",freq='2YS-JAN'));
    ax[2].set_xticklabels(pd.date_range(start="1995-01-01", end="2025-01-01",freq='2YS-JAN').strftime('%Y'));
    
-   #tTActual = sst.time[-1].dt.strftime("%d %B %Y").values + " %2.2f ºC "%(sst[-1].values)
-   #tTMaxima =  'Temperatura máxima: ' + "%2.2f ºC"%(tmax) + ' el ' + d_tmax.dt.strftime("%d %B %Y").values
-   #tTMinima =  'Temperatura mínima: ' + "%2.2f ºC"%(tmin) + ' el ' + d_tmin.dt.strftime("%d %B %Y").values
-   #tPeriodo =  " [" + sstd.time[0].dt.strftime("%d %B %Y").values + " - "+ sstd.time[-1].dt.strftime("%d %B %Y").values + "]"
-   #TituloFigura  = 'Temperatura superficial en el '+ titulo
-   #ax.set_title(TituloFigura + tPeriodo + '\n' + tTMaxima + ' - ' + tTMinima + tTendencia);
-
    plt.savefig(imageDir+'/'+titulo_short+'_temp_promedio_capas_contorno.png',bbox_inches='tight', pad_inches=0.1, dpi=300)
    plt.close(fig)
 

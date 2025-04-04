@@ -87,8 +87,6 @@ for iD in range(0,5):
     demPolygon_transformed = transform_polygon(demPolygon)
 
 ## select data in the demarcation
-
-
     if titulo_short == 'LEB':
         slicelatitude=slice(35.5,42.75)
         slicelongitude=slice(358-360,368-360)
