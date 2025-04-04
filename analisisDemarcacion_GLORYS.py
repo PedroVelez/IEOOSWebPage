@@ -51,7 +51,7 @@ yearC2='2000'
 
 
 # Load the demarcacion data
-for iD in range(0,1):
+for iD in range(1,2):
    
    titulo = Titulos[iD]
    titulo_short = Titulos_short[iD]
@@ -81,6 +81,21 @@ for iD in range(0,1):
       presionTicksi=[400,800,1200,1600,2000]
       mesTticks=[1,3,6,9,12]
       mesTticksT=['Enero','Marzo', 'Junio','Septiembre','']   
+
+   elif  titulo_short == 'LEB':
+      rangoT= np.arange(12,25,0.25)
+      rangoTt=[12,14,16,18,20,24]
+      rangoTcb=np.arange(12,25,4)
+      rangoS= np.arange(37,39,0.05)
+      rangoSt=[37,37.5,38,38.25,38.5,38.55]
+      rangoScb=np.arange(37,38.75,0.25)
+      rangop=[0,400,2000]
+      presionTickss=[0,200,400]
+      presionTicksi=[400,800,1200,1600,2000]
+      mesTticks=[1,3,6,9,12]
+      mesTticksT=['Enero','Marzo', 'Junio','Septiembre','']         
+      
+      rangoTa=np.arange(-.6,.6,0.05)
 
 # Load the data from the .txt file
    demCoord = []
@@ -268,7 +283,7 @@ for iD in range(0,1):
               DC_salt_clim.mean(dim='longitude').mean(dim='latitude').sel(depth=slice(0,rangop[1]+100)).depth,
               DC_salt_clim.mean(dim='longitude').mean(dim='latitude').sel(depth=slice(0,rangop[1]+100)).transpose(),levels=rangoSt,colors='k')
    ax2.invert_yaxis()
-   ax2.clabel(cm, fmt='%2.0f', colors='w', fontsize=10)
+   ax2.clabel(cm, fmt='%2.2f', colors='w', fontsize=10)
    ax2.set_ylim([rangop[1],0]);
    ax2.set_title('Salinidad')
    ax2.set_xticks(mesTticks,['','', '','','']) 
@@ -300,7 +315,7 @@ for iD in range(0,1):
                (0.10, 0.10, 0.8, 0.38)]
    PosicionCB = [0.92, 0.10, 0.02, 0.53]
 
-   rangoTa=np.arange(-.8,.8,0.05)
+  
 
    fig, ax = plt.subplots(3,1,figsize = (14,12),sharex=True)
 
@@ -352,23 +367,23 @@ for iD in range(0,1):
    
    ax[0].set_title('Anomalia (respecto '+yearC1+'-'+yearC2+') de temperatura promedio [ºC] en la '+titulo+ '\n'+tPeriodo);
 
-   print('           > minaT:'+str(DCi_temp_anom_wmean.sel(depth=slice(10,2600)).min().values))
-   print('           > maxaT:'+str(DCi_temp_anom_wmean.sel(depth=slice(10,2600)).max().values))
+   print('           > minaT:'+str(DCi_temp_anom_wmean_rolling.sel(depth=slice(10,2600)).min().values))
+   print('           > maxaT:'+str(DCi_temp_anom_wmean_rolling.sel(depth=slice(10,2600)).max().values))
    
    
    # UpperOcean
-   ax[1].contour(DCi_temp_anom_wmean.time,
-                 DCi_temp_anom_wmean.sel(depth=slice(10,400)).depth, 
-                 DCi_temp_anom_wmean.sel(depth=slice(10,400)).transpose()
+   ax[1].contour(DCi_temp_anom_wmean_rolling.time,
+                 DCi_temp_anom_wmean_rolling.sel(depth=slice(10,400)).depth, 
+                 DCi_temp_anom_wmean_rolling.sel(depth=slice(10,400)).transpose()
                  ,colors='w',levels=[-0.15, -0.05, 0.05, 0.15] )
-   ax[1].contour(DCi_temp_anom_wmean.time, 
-                 DCi_temp_anom_wmean.sel(depth=slice(10,400)).depth, 
-                 DCi_temp_anom_wmean.sel(depth=slice(10,400)).transpose(),
+   ax[1].contour(DCi_temp_anom_wmean_rolling.time, 
+                 DCi_temp_anom_wmean_rolling.sel(depth=slice(10,400)).depth, 
+                 DCi_temp_anom_wmean_rolling.sel(depth=slice(10,400)).transpose(),
                  colors='k', linewidths=1,levels=[0] )
 
-   ax[1].contourf(DCi_temp_anom_wmean.time, 
-                 DCi_temp_anom_wmean.sel(depth=slice(10,400)).depth, 
-                 DCi_temp_anom_wmean.sel(depth=slice(10,400)).transpose(),
+   ax[1].contourf(DCi_temp_anom_wmean_rolling.time, 
+                 DCi_temp_anom_wmean_rolling.sel(depth=slice(10,400)).depth, 
+                 DCi_temp_anom_wmean_rolling.sel(depth=slice(10,400)).transpose(),
                   levels=rangoTa, cmap='RdBu_r',extend='both')
     
    ax[1].set_ylim(0,400)
@@ -377,19 +392,19 @@ for iD in range(0,1):
    ax[1].grid(linestyle='-', linewidth=.9)
    ax[1].set_position(Posiciones[1])
 
-   ax[2].contour(DCi_temp_anom_wmean.time, 
-                 DCi_temp_anom_wmean.sel(depth=slice(400,2600)).depth, 
-                 DCi_temp_anom_wmean.sel(depth=slice(400,2600)).transpose(),
+   ax[2].contour(DCi_temp_anom_wmean_rolling.time, 
+                 DCi_temp_anom_wmean_rolling.sel(depth=slice(400,2600)).depth, 
+                 DCi_temp_anom_wmean_rolling.sel(depth=slice(400,2600)).transpose(),
                  colors='w',levels=[-0.05,0.05] )
    
-   ax[2].contour(DCi_temp_anom_wmean.time, 
-                 DCi_temp_anom_wmean.sel(depth=slice(400,2600)).depth, 
-                 DCi_temp_anom_wmean.sel(depth=slice(400,2600)).transpose(),
-                 colors='w', linewidths=2,levels=[0] )
+   ax[2].contour(DCi_temp_anom_wmean_rolling.time, 
+                 DCi_temp_anom_wmean_rolling.sel(depth=slice(400,2600)).depth, 
+                 DCi_temp_anom_wmean_rolling.sel(depth=slice(400,2600)).transpose(),
+                 colors='k', linewidths=1,levels=[0] )
    
-   cntr2 = ax[2].contourf(DCi_temp_anom_wmean.time,
-                          DCi_temp_anom_wmean.sel(depth=slice(400,2600)).depth, 
-                          DCi_temp_anom_wmean.sel(depth=slice(400,2600)).transpose(),
+   cntr2 = ax[2].contourf(DCi_temp_anom_wmean_rolling.time,
+                          DCi_temp_anom_wmean_rolling.sel(depth=slice(400,2600)).depth, 
+                          DCi_temp_anom_wmean_rolling.sel(depth=slice(400,2600)).transpose(),
                           levels=rangoTa,cmap='RdBu_r',extend='both')
   
    ax[2].set_ylim(400,2400)
