@@ -40,8 +40,9 @@ fprintf(fid,'<body> \n');
 
 %% Titulo
 fprintf(fid,'    <div align="center">\n');
-fprintf(fid,'        Cobertura del sistema de observacion oceanica del <b>IEO</b> el %s <br/>\n',date);
-fprintf(fid,'        (24) Estaciones hidrograficas. Último dato recibido el  %s <br/>\n',date);
+fprintf(fid,'        Cobertura del sistema de observacion oceanica del <b>IEO</b> <br/>\n');
+%fprintf(fid,'        Cobertura del sistema de observacion oceanica del <b>IEO</b> el %s <br/>\n',date);
+%fprintf(fid,'        (24) Estaciones hidrograficas. Último dato recibido el  %s <br/>\n',date);
 fprintf(fid,'        <div id="map" style="width: %d px; height: %d px;"></div> \n',mapTamano(1),mapTamano(2));
 fprintf(fid,'    </div>\n');
 
