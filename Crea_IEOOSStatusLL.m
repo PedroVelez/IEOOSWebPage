@@ -123,7 +123,7 @@ fprintf(fid,'               d === "%s" ? "#ff9999" :\n',Demarcaciones{2,5});
 fprintf(fid,'               "#ff7f00";\n');
 fprintf(fid,'    }');
 fprintf(fid,'    var div = L.DomUtil.create(''div'', ''info legend'');\n');
-fprintf(fid,'    labels = [''<strong>Demarcaciones</strong>''],\n');
+fprintf(fid,'    labels = [''<strong>Regiones hidrograficas</strong>''],\n');
 fprintf(fid,'    categories = [''%s'',''%s'', ''%s'',''%s'',''%s''];\n',Demarcaciones{2,1},Demarcaciones{2,2},Demarcaciones{2,3},Demarcaciones{2,4},Demarcaciones{2,5});
 fprintf(fid,'    for (var i = 0; i < categories.length; i++) {\n');
 fprintf(fid,'            div.innerHTML += \n');
